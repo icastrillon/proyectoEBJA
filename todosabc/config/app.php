@@ -39,13 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', true),
-    
-    Barryvdh\Debugbar\ServiceProvider::class,
-
-    'Debugbar' => Barryvdh\Debugbar\Facade::class,
-
-
+    'debug' => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------

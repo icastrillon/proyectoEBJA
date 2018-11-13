@@ -259,7 +259,7 @@ Ninguno -》 2-3EGB
 				</div>
 				
 				<div class="form-horizontal">
-					@if (session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19)
+					@if (session('user')->id_oferta==8 or session('user')->id_oferta==15)
 					<div class="form-group">
 						<label class="col-sm-4 control-label" for="oferta_educativa">* OFERTA EDUCATIVA</label>
 						<div class="col-sm-5">
@@ -281,7 +281,7 @@ Ninguno -》 2-3EGB
 				</div>
 				
 				<div class="form-horizontal">
-					@if (session('user')->id_oferta==2 or session('user')->id_oferta==10 or session('user')->id_oferta==16 or session('user')->id_oferta==17 )
+					@if (session('user')->id_oferta==2 or session('user')->id_oferta==10)
 					<div class="form-group">
 						<label class="col-sm-4 control-label" for="id_docente">DOCENTE-INSTITUCION</label>
 						<div class="col-sm-6">
@@ -292,7 +292,7 @@ Ninguno -》 2-3EGB
 							@endif
 						</div>
 					</div>
-					@elseif (session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 )
+					@elseif (session('user')->id_oferta==8 or session('user')->id_oferta==15)
 					<div class="form-group">
 						<label class="col-sm-4 control-label" for="id_institucion">* INSTITUCIÓN</label>
 						<div class="col-sm-5">
@@ -318,7 +318,7 @@ Ninguno -》 2-3EGB
 					</div>
 					@endif
 				</div>
-				@if (session('user')->id_oferta!=2 and session('user')->id_oferta!=10 and session('user')->id_oferta!=16 and   session('user')->id_oferta!=17)
+				@if (session('user')->id_oferta!=2 and session('user')->id_oferta!=10)
 				<div class="form-horizontal">
 					<div class="form-group">
 						<label class="col-sm-4 control-label" for="paralelo">* PARALELO</label>
@@ -386,7 +386,7 @@ Ninguno -》 2-3EGB
 						</div>
 					</div>
 				</div>
-				@if (session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19)
+				@if (session('user')->id_oferta==8 or session('user')->id_oferta==15)
 				<div class="form-horizontal">
 					<div class="form-group">
 					    <label for="lugar" class="col-sm-4 control-label">* Estudiante atendido en:</label>

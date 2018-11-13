@@ -11,8 +11,7 @@
 				@endcomponent
 			</div>
 		@endif
-		@if (isset($docentes) and $docentes->count() == 0 or session('user')->id_oferta==6 or session('user')->id_oferta==7 or session('user')->id_oferta==8 or session('user')->id_oferta==13 or session('user')->id_oferta==14 or session('user')->id_oferta==15 
-		or session('user')->id_oferta==17 or session('user')->id_oferta==20 or session('user')->id_oferta==21)
+		@if (isset($docentes) and $docentes->count() == 0 or session('user')->id_oferta==6 or session('user')->id_oferta==7 or session('user')->id_oferta==8 or session('user')->id_oferta==13 or session('user')->id_oferta==14 or session('user')->id_oferta==15)
 		<a type="button" class="btn btn-success btn-sm" href="{{ url('docentes/nuevo') }}">Nuevo Docente</a>
 		<br><br>
 		@endif

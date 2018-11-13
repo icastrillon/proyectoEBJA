@@ -1,4 +1,4 @@
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
@@ -94,13 +94,13 @@
     <script src="{{ asset('js/todos.js') }}"></script>
     @if(is_null(session('user')))
 
-    @elseif(session('user')->id_oferta==2 or session('user')->id_oferta==10 or session('user')->id_oferta==16 or session('user')->id_oferta==17 )
+    @elseif(session('user')->id_oferta==2 or session('user')->id_oferta==10)
     <script src="{{ asset('js/alfa.js') }}"></script>
-    @elseif(session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19)
+    @elseif(session('user')->id_oferta==8 or session('user')->id_oferta==15)
     <script src="{{ asset('js/post.js') }}"></script>
-    @elseif(session('user')->id_oferta==6 or session('user')->id_oferta==13 or session('user')->id_oferta==20)
+    @elseif(session('user')->id_oferta==6 or session('user')->id_oferta==13)
     <script src="{{ asset('js/basica.js') }}"></script>
-    @elseif(session('user')->id_oferta==7 or session('user')->id_oferta==14  or session('user')->id_oferta==21)
+    @elseif(session('user')->id_oferta==7 or session('user')->id_oferta==14)
     <script src="{{ asset('js/bachillerato.js') }}"></script>
     @endif
 </body>

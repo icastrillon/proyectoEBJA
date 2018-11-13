@@ -6,9 +6,6 @@ function trunc (x, posiciones = 0) {
   return Number(numStr)
 }
 
-console.log(trunc(17.97, 2))
-console.log(trunc(-17.977777777, 2))
-
 function desertar(codigo_inscripcion, elemento){
 	var q1p1 = document.getElementById('q1p1-'+codigo_inscripcion);
 	var q1p2 = document.getElementById('q1p2-'+codigo_inscripcion);

@@ -52,8 +52,4 @@ $app->singleton(
 |
 */
 
-
-
-
-
 return $app;

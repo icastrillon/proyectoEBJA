@@ -42,7 +42,7 @@ class CustomAuthController extends Controller
 			->where('id', $user->id_oferta)
 			->first();
 
-			if($user->id_oferta==2 or $user->id_oferta==10 or $user->id_oferta==16 or $user->id_oferta==17){
+			if($user->id_oferta==2 or $user->id_oferta==10){
 				$paginas = DB::table('todosabc.urls')
 		        ->where('id_perfil', $user->id_perfil)
 		        ->where('activo', true)
@@ -50,7 +50,7 @@ class CustomAuthController extends Controller
 		        ->where('nombre','<>','Calificaciones Basica')
 		        ->where('nombre','<>','Calificaciones Bachillerato')
 		        ->get();
-		    }else if($user->id_oferta==8 or $user->id_oferta==15 or $user->id_oferta==19){
+		    }else if($user->id_oferta==8 or $user->id_oferta==15){
 				$paginas = DB::table('todosabc.urls')
 		        ->where('id_perfil', $user->id_perfil)
 		        ->where('activo', true)
@@ -58,7 +58,7 @@ class CustomAuthController extends Controller
 		        ->where('nombre','<>','Calificaciones Basica')
 		        ->where('nombre','<>','Calificaciones Bachillerato')
 		        ->get();
-		    }else if($user->id_oferta==6 or $user->id_oferta==13 or $user->id_oferta==20){
+		    }else if($user->id_oferta==6 or $user->id_oferta==13){
 				$paginas = DB::table('todosabc.urls')
 		        ->where('id_perfil', $user->id_perfil)
 		        ->where('activo', true)
@@ -66,7 +66,7 @@ class CustomAuthController extends Controller
 		        ->where('nombre','<>','Calificaciones Post')
 		        ->where('nombre','<>','Calificaciones Bachillerato')
 		        ->get();
-		    }else if($user->id_oferta==7 or $user->id_oferta==14 or $user->id_oferta==21){
+		    }else if($user->id_oferta==7 or $user->id_oferta==14){
 				$paginas = DB::table('todosabc.urls')
 		        ->where('id_perfil', $user->id_perfil)
 		        ->where('activo', true)

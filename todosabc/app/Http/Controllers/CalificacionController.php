@@ -153,7 +153,7 @@ class CalificacionController extends Controller
       		$tiene_fase = true;
 			$this->cargarParalelosEstudiantes();
 
-			if($request->input('hfase')==4 or $request->input('hfase')==8 ){
+			if($request->input('hfase')==4 or $request->input('hfase')==8){
 		    	$materias = DB::table('todosabc.materias_oferta')
 				->join('materias', 'materias_oferta.id_materia','=','materias.id')
 				->select('todosabc.materias_oferta.*','materias.nombre as asignatura')
@@ -344,47 +344,9 @@ class CalificacionController extends Controller
 				->get();
 			}
 
-			// estudiantes id_oferta=11
-			
-			$estudiantes_post_m3_cont = DB::table('todosabc.matriculados')
-			->where('id_docente', $docente[0]->id)
-			->where('id_oferta', 11)
-			->where('todosabc.matriculados.asiste_con_frecuencia', true)
-			 ->get();
-	
-			$materias_m3_cont = null;
-
-			if ($estudiantes_post_m3_cont->count()>0){
-				$materias_m3_cont = DB::table('todosabc.materias_oferta')
-				->join('materias', 'materias_oferta.id_materia','=','materias.id')
-				->select('todosabc.materias_oferta.*','materias.nombre as asignatura')
-				->where('id_oferta', 11)
-				->get();
-			}
-
-			$estudiantes_post_m4_cont = DB::table('todosabc.matriculados')
-		    ->where('id_docente', $docente[0]->id)
-			->where('id_oferta', 12)
-			->where('todosabc.matriculados.asiste_con_frecuencia', true)
-			->get();
-			
-				$materias_m4_cont = null;
-			
-			// estudiantes id_oferta=12
-			if ($estudiantes_post_m4_cont->count()>0){
-				$materias_m4_cont = DB::table('todosabc.materias_oferta')
-				->join('materias', 'materias_oferta.id_materia','=','materias.id')
-				->select('todosabc.materias_oferta.*','materias.nombre as asignatura')
-				->where('id_oferta', 12)
-				->get();
-			}
-
-
 			view()->share(['materias_m1' => $materias_m1,
 						   'materias_m2' => $materias_m2,
 						   'materias_m3' => $materias_m3,
-						   'materias_m3_cont' => $materias_m3_cont,
-						   'materias_m4_cont' => $materias_m4_cont,
 			               'ies' => $ies,
 			               ]);
 

@@ -80,13 +80,7 @@ class DocenteController extends Controller
                     $docente->tiene_voluntario = false;
                 }
             }
-        }else if(session('user')->id_oferta==10 )
-        {
-            $docente->clasificacion = $request->input('clasificacion');
-        }
-
-        else if(session('user')->id_oferta==16 or session('user')->id_oferta==17 )       
-        {
+        }else if(session('user')->id_oferta==10){
             $docente->clasificacion = $request->input('clasificacion');
         }
 
@@ -153,19 +147,9 @@ class DocenteController extends Controller
                     $docente->tiene_voluntario = false;
                 }
             }
-        }
-
-        else if(session('user')->id_oferta==10){
+        }else if(session('user')->id_oferta==10){
             $docente->clasificacion = $request->input('clasificacion');
         }
-
-
-        else if(session('user')->id_oferta==16 or session('user')->id_oferta==17 )       
-        {
-            $docente->clasificacion = $request->input('clasificacion');
-        }
-
-
 
 		$this->cargarInstitucionesDeUsuario();
     	$docente->id_institucion = $id_institucion;

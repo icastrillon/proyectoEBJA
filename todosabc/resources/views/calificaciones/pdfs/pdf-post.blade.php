@@ -32,8 +32,6 @@ if($oferta->id == 3){
 	echo "<td><label>3 EGB - 4 EGB</label></td>";
 }else if($oferta->id == 4){
 	echo "<td><label>5 EGB - 6 EGB</label></td>";
-}else if($oferta->id == 11){
-	echo "<td><label>5 EGB - 6 EGB</label></td>";
 }else{
 	echo "<td><label>7 EGB</label></td>";
 }
