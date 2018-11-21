@@ -88,7 +88,7 @@
 							</div>
 					    </div>
 					</div>
-					@elseif(session('user')->id_oferta==10)
+					@elseif(session('user')->id_oferta==10 )
 					<div class="form-horizontal">
 					    <label for="clasificacion" class="col-sm-3 control-label"><span style="color: red; font-weight: bold; font-size: 20px;">--></span> CLASIFICACIÓN:</label>
 					    <div class="col-sm-7 alert alert-warning" role="alert">
@@ -116,6 +116,40 @@
 				    		</select>
 					    </div>
 					</div>
+
+					@elseif(session('user')->id_oferta==16 or session('user')->id_oferta==17  )
+					<div class="form-horizontal">
+					    <label for="clasificacion" class="col-sm-3 control-label"><span style="color: red; font-weight: bold; font-size: 20px;">--></span> CLASIFICACIÓN:</label>
+					    <div class="col-sm-7 alert alert-warning" role="alert">
+					    	¿El Docente en qué clasificación se encuentra?					        
+						  	<select class="form-control" id="clasificacion" name="clasificacion" style="width: 450px; font-size: 10px;" value="{{ $docente->clasificacion }}">
+				    			<option @if($docente->clasificacion=='Docente Nombramiento con Horas extra')
+				    				selected="selected"
+				    			@endif value="Docente Nombramiento con Horas extra">
+				    			Docente Nombramiento con Horas extra</option>
+				    			<option @if($docente->clasificacion=='Docente Ed. Básica Media - Post con Horas extra')
+				    				selected="selected"
+				    			@endif value="Docente Ed. Básica Media - Post con Horas extra">
+				    			Docente Ed. Básica Media - Post con Horas extra</option>
+				    			<option @if($docente->clasificacion=='Docente Ed. Básica Media - Post sin Horas extra')
+				    				selected="selected"
+				    			@endif value="Docente Ed. Básica Media - Post sin Horas extra">Docente Ed. Básica Media - Post sin Horas extra</option>
+				    			<option @if($docente->clasificacion=='Docente Básica Superior Intensiva con Horas extra')
+				    				selected="selected"
+				    			@endif value="Docente Básica Superior Intensiva con Horas extra">
+				    			Docente Básica Superior Intensiva con Horas extra</option>
+				    			<option @if($docente->clasificacion=='Docente Bachillerato Intensivo con Horas extra')
+				    				selected="selected"
+				    			@endif value="Docente Bachillerato Intensivo con Horas extra">
+				    			Docente Bachillerato Intensivo con Horas extra</option>
+				    		</select>
+					    </div>
+					</div>
+
+
+
+
+
 					@endif
 				</form>
 			</div>

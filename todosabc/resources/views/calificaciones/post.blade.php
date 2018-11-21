@@ -63,6 +63,8 @@
 				<label>3 EGB - 4 EGB</label>
 				@elseif($oferta->id == 4)
 				<label>5 EGB - 6 EGB</label>
+				@elseif($oferta->id == 11)
+				<label>5 EGB - 6 EGB</label>
 				@else
 				<label>7 EGB</label>
 				@endif
