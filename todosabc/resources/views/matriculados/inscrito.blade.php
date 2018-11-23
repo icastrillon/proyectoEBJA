@@ -242,7 +242,7 @@
 							</select>
 						</div>
 
- 					<label for="anuncio  font-size: 14px"  >Valide con la documentación del estudiante</label>
+ 					<label for="anuncio  font-size: 14px" > *Valide con la documentación del estudiante</label>
 					</div>					
 				</div>
 								
