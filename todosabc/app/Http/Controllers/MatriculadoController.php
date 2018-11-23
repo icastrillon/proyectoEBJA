@@ -821,7 +821,7 @@ class MatriculadoController extends Controller
                        
         }else if(session('user')->id_oferta==19){
             $this->ofertas_educativas = DB::table('todosabc.ofertas')
-            ->whereIn('id', [17,18,19])
+            ->whereIn('id', [17,16,19])
             ->orderBy('nombre')
             ->get();    
         }
