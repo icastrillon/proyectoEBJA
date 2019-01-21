@@ -229,6 +229,7 @@ class MatriculadoController extends Controller
             ->select('todosabc.matriculados.*', 'todosabc.ofertas.nombre as oferta')
             ->where('cedula_identidad', trim($identificacion))
             ->whereIn('todosabc.matriculados.id_oferta', $ids_ofertas)
+            ->where('traslado',null)
             ->get();
 
             if(count($matriculados)>0){

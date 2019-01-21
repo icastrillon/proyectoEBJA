@@ -43,13 +43,15 @@
 		    					</td>
 
 		    				<td>
-		    					@if ($mat->ultimo_anio_aprobado=='10 EGB' or $mat->ultimo_anio_aprobado=='Documento 10mo. BGU' or $mat->ultimo_anio_aprobado=='1 BGU' or $mat->ultimo_anio_aprobado=='Documento 1ro. BGU' )  
+		    					@if ($mat->ultimo_anio_aprobado=='10 EGB' or $mat->ultimo_anio_aprobado=='Documento 10mo. EGB' 
+		    					or $mat->ultimo_anio_aprobado=='1 BGU' or $mat->ultimo_anio_aprobado=='Documento 1ro. BGU' )  
 
 		    					<input type="checkbox" name="f2-{{$mat->codigo_inscripcion}}" id="f2-{{$mat->codigo_inscripcion}}"  checked="checked" >	
 		    					@endif
 		    				</td>
 		    				<td>
-		    					@if ($mat->ultimo_anio_aprobado=='10 EGB' or $mat->ultimo_anio_aprobado=='Documento 10mo. EGB' or $mat->ultimo_anio_aprobado=='1 BGU' or $mat->ultimo_anio_aprobado=='Documento 1ro. BGU' or
+		    					@if ($mat->ultimo_anio_aprobado=='10 EGB' or $mat->ultimo_anio_aprobado=='Documento 10mo. EGB' or $mat->ultimo_anio_aprobado=='1 BGU' or 
+		    					$mat->ultimo_anio_aprobado=='Documento 1ro. BGU' or
 		    					$mat->ultimo_anio_aprobado=='2 BGU' 
 		    					or $mat->ultimo_anio_aprobado=='Documento 2do. BGU' ) 
 		    					<input type="checkbox" name="f3-{{$mat->codigo_inscripcion}}" id="f3-{{$mat->codigo_inscripcion}}"  checked="checked">
