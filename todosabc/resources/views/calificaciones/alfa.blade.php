@@ -142,6 +142,7 @@
 							<td scope="row">
 								{{ $loop->index + 1 }}
 								<input type="hidden" name="id_matriculado-{{ $mat->codigo_inscripcion }}" value="{{ $mat->id }}">
+
 							</td>
 							<td>{{ $mat->nombres_aspirantes }}</td>
 							<td>{{ $mat->cedula_identidad }}</td>
@@ -160,6 +161,8 @@
 											@if($mat->modulo_1_desertado==true)
 												disabled="true" 
 											@endif>
+
+								
 											<input type="hidden" name="hm1p1-{{ $mat->codigo_inscripcion }}" id="hm1p1-{{ $mat->codigo_inscripcion }}" value="{{ $mat->modulo_1_parcial_1 }}">
 										</td>
 										<td>

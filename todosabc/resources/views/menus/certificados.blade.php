@@ -34,7 +34,7 @@
 			    				<td>{{ $mat->oferta_educativa }}</td>
 			    				<td>{{ $mat->amie }} - {{ $mat->institucion }}</td>
 			    				<td>@if ($mat->asiste_con_frecuencia==false) Desertó @else Asiste con frecuencia @endif</td>
-			    				@if (session('user')->id_oferta==2 or session('user')->id_oferta==10)
+			    				@if (session('user')->id_oferta==2 or session('user')->id_oferta==10 or session('user')->id_oferta==16)
 								<td>{{ $mat->fecha_matriculacion }}</td>
 								@else
 								<td>{{ $mat->paralelo }}</td>

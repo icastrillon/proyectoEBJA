@@ -1,10 +1,11 @@
-function trunc (x, posiciones = 0) {
-  var s = x.toString()
-  var l = s.length
-  var decimalLength = s.indexOf('.') + 1
-  var numStr = s.substr(0, decimalLength + posiciones)
-  return Number(numStr)
-}
+	function trunc (x, posiciones = 0) {
+	  var s = x.toString()
+	  var l = s.length
+	  var decimalLength = s.indexOf('.') + 1
+	  var numStr = s.substr(0, decimalLength + posiciones)
+	  return Number(numStr)
+	}
+
 
 function desertar(codigo_inscripcion, elemento){
 	var q1p1 = document.getElementById('q1p1-'+codigo_inscripcion);
@@ -151,6 +152,7 @@ function calcular_pm_parciales_q2(codigo_inscripcion){
 	}
 
 	var pm = (q2p1.value * 1 + q2p2.value * 1 + q2p3.value * 1)/3;
+	
 	q2pmpar.value = trunc(pm, 2);
 	hq2pmpar.value = trunc(pm, 2);
 	q2pmgpar.value = trunc(pm * 0.80, 2);

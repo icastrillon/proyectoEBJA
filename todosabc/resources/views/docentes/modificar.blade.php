@@ -88,7 +88,7 @@
 							</div>
 					    </div>
 					</div>
-					@elseif(session('user')->id_oferta==10)
+					@elseif(session('user')->id_oferta==10 )
 					<div class="form-horizontal">
 					    <label for="clasificacion" class="col-sm-3 control-label"><span style="color: red; font-weight: bold; font-size: 20px;">--></span> CLASIFICACIÓN:</label>
 					    <div class="col-sm-7 alert alert-warning" role="alert">
@@ -116,6 +116,29 @@
 				    		</select>
 					    </div>
 					</div>
+
+					@elseif(session('user')->id_oferta==16 or session('user')->id_oferta==17  )
+					<div class="form-horizontal">
+					    <label for="clasificacion" class="col-sm-3 control-label"><span style="color: red; font-weight: bold; font-size: 20px;">--></span> CLASIFICACIÓN:</label>
+					    <div class="col-sm-7 alert alert-warning" role="alert">
+					    	¿El Docente en qué clasificación se encuentra?					        
+						  	<select class="form-control" id="clasificacion" name="clasificacion" style="width: 450px; font-size: 10px;" value="{{ $docente->clasificacion }}">
+				    			<option @if($docente->clasificacion=='Docente Post Alfabetización')
+				    				selected="selected"
+				    			@endif value="Docente PostAlfabetización">
+				    			Docente Post Alfabetización</option>
+				    			<option @if($docente->clasificacion=='Docente Básica Superior Intensiva')
+				    				selected="selected"
+				    			@endif value="Docente Básica Superior Intensiva">
+				    			Docente Básica Superior Intensiva</option>
+				    			<option @if($docente->clasificacion=='Docente Bachillerato Intensivo')
+				    				selected="selected"
+				    			@endif value="Docente Bachillerato Intensivo">
+				    			Docente Bachillerato Intensivo</option>
+				    		</select>
+					    </div>
+					</div>
+
 					@endif
 				</form>
 			</div>

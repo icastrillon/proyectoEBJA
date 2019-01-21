@@ -27,6 +27,7 @@ class CalificacionController extends Controller
 	private $calificaciones_basica;
 	private $calificaciones_bachillerato;
 	private $docentes_asignaturas;
+	private $ultimo_anio_aprobado;
 
 	public function bachillerato_fases(Request $request)
     {
@@ -38,7 +39,7 @@ class CalificacionController extends Controller
 
       foreach ($ies as $ie) {
       	array_push($ids_ies, $ie->id);
-      }
+     	 }
 
       $matriculados = DB::table('todosabc.matriculados')
       ->whereIn('id_institucion', $ids_ies)
@@ -57,6 +58,12 @@ class CalificacionController extends Controller
           ->where('id_oferta', $mat->id_oferta)
           ->orderBy('id')
           ->get();
+
+//           $ultimo_anio_aprobado = DB::table('todosabc.matriculados')
+  //        ->where('id_oferta', $mat->id_oferta)
+    //      ->orderBy('id')
+      //    ->get();
+
 
           if($mat->fase1==null || $mat->fase1==false){
           	$calificaciones_bachillerato = DB::table('todosabc.calificaciones_bachillerato')
@@ -79,7 +86,7 @@ class CalificacionController extends Controller
           	->delete();
           }
       }
-      
+ 
       return redirect()->route('calificaciones_prebachillerato');
     }
 
@@ -153,7 +160,7 @@ class CalificacionController extends Controller
       		$tiene_fase = true;
 			$this->cargarParalelosEstudiantes();
 
-			if($request->input('hfase')==4 or $request->input('hfase')==8){
+			if($request->input('hfase')==4 or $request->input('hfase')==8 ){
 		    	$materias = DB::table('todosabc.materias_oferta')
 				->join('materias', 'materias_oferta.id_materia','=','materias.id')
 				->select('todosabc.materias_oferta.*','materias.nombre as asignatura')
@@ -344,9 +351,47 @@ class CalificacionController extends Controller
 				->get();
 			}
 
+			// estudiantes id_oferta=11
+			
+			$estudiantes_post_m3_cont = DB::table('todosabc.matriculados')
+			->where('id_docente', $docente[0]->id)
+			->where('id_oferta', 11)
+			->where('todosabc.matriculados.asiste_con_frecuencia', true)
+			 ->get();
+	
+			$materias_m3_cont = null;
+
+			if ($estudiantes_post_m3_cont->count()>0){
+				$materias_m3_cont = DB::table('todosabc.materias_oferta')
+				->join('materias', 'materias_oferta.id_materia','=','materias.id')
+				->select('todosabc.materias_oferta.*','materias.nombre as asignatura')
+				->where('id_oferta', 11)
+				->get();
+			}
+
+			$estudiantes_post_m4_cont = DB::table('todosabc.matriculados')
+		    ->where('id_docente', $docente[0]->id)
+			->where('id_oferta', 12)
+			->where('todosabc.matriculados.asiste_con_frecuencia', true)
+			->get();
+			
+				$materias_m4_cont = null;
+			
+			// estudiantes id_oferta=12
+			if ($estudiantes_post_m4_cont->count()>0){
+				$materias_m4_cont = DB::table('todosabc.materias_oferta')
+				->join('materias', 'materias_oferta.id_materia','=','materias.id')
+				->select('todosabc.materias_oferta.*','materias.nombre as asignatura')
+				->where('id_oferta', 12)
+				->get();
+			}
+
+
 			view()->share(['materias_m1' => $materias_m1,
 						   'materias_m2' => $materias_m2,
 						   'materias_m3' => $materias_m3,
+						   'materias_m3_cont' => $materias_m3_cont,
+						   'materias_m4_cont' => $materias_m4_cont,
 			               'ies' => $ies,
 			               ]);
 
@@ -444,16 +489,22 @@ class CalificacionController extends Controller
 
 			CalificacionBachillerato::where('id_matriculado', $k->id_matriculado)
 			->where('id_oferta_fase', $fase->id)
+			->orderby('id_matriculado','desc')
 			->update(['id_materia_oferta_gracia' => $k->id_materia_oferta_gracia]);
-	
+			
+   	
 			if($k->desertado==true){
 				CalificacionBachillerato::where('id_matriculado', $k->id_matriculado)
 				->where('id_oferta_fase', $fase->id)
+				->orderby('id_matriculado','desc')
 				->update(['fecha_registro' => date('Y-m-d h:m:s'),'desertado' => true]);
+						
 			}else{
 				CalificacionBachillerato::where('id_matriculado', $k->id_matriculado)
 				->where('id_oferta_fase', $fase->id)
+				->orderby('id_matriculado','desc')
 				->update(['fecha_registro' => date('Y-m-d h:m:s'),'desertado' => false]);
+				
 
 				$no_desertado = Matriculado::find($k->id_matriculado);
 				$no_desertado->razon_desercion = null;
@@ -809,6 +860,7 @@ class CalificacionController extends Controller
 				$desertados = CalificacionBachillerato::where('id_matriculado', $estudiante->id)
 				->where('id_oferta_fase', $fase->id)
 				->where('desertado', true)
+				->orderby('id_matriculado','desc')
 				->get();
 
 				if($desertados->count() > 0){
@@ -822,6 +874,7 @@ class CalificacionController extends Controller
 				$gracias = CalificacionBachillerato::where('id_matriculado', $estudiante->id)
 				->where('id_oferta_fase', $fase->id)
 				->where('gracia', '>', 0)
+				->orderby('id_matriculado','desc')
 				->get();
 
 				if($gracias->count() == 0){
@@ -888,6 +941,8 @@ class CalificacionController extends Controller
 				$gracias = CalificacionBasica::where('id_matriculado', $estudiante->id)
 				->where('gracia', '>', 0)
 				->get();
+
+				
 
 				if($gracias->count() == 0){
 					$k->id_materia_oferta_gracia = 1;

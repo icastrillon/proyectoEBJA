@@ -229,7 +229,8 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label" for="ultimo_anio_aprobado">* ÚLTIMO AÑO APROBADO</label>
 						<div class="col-sm-3">
-							<select class="form-control" id="ultimo_anio_aprobado" name="ultimo_anio_aprobado" value="{{ $inscrito->ultimo_anio_aprobado }}">
+							<select class="form-control" id="ultimo_anio_aprobado" name="ultimo_anio_aprobado" 
+							value="{{ $inscrito->ultimo_anio_aprobado }}">
 								<option value="-1">--Seleccionar--</option>
 								@foreach ($ultimos_anios_aprobados as $val)
 								<option value="{{ $val->ultimo_anio_aprobado }}" 
@@ -240,26 +241,13 @@
 								@endforeach
 							</select>
 						</div>
-						<button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="
-ULTIMO AÑO APROBADO - 》CURSA
-Ninguno -》 2-3EGB
-1 EGB -》 2-3 EGB
-2 EGB - 》 3EGB
-3 EGB - 》 4-5 EGB ABC3
-4 EGB - 》 5-6 EGB
-5 EGB - 》 5-6 EGB
-6 EGB - 》7 EGB
-7 EGB - 》 8-9-10 EGB
-8 EGB - 》 8-9-10 EGB
-9 EGB - 》 8-9-10 EGB
-10 EGB -》1-2-3 BGU
-1 BGU - 》 2-3 BGU
-2 BGU -》 3 BGU">i</button>						
+
+ 					<label for="anuncio  font-size: 14px" > *Valide con la documentación del estudiante</label>
 					</div>					
 				</div>
 								
 				<div class="form-horizontal">
-					@if (session('user')->id_oferta==8 or session('user')->id_oferta==15)
+					@if (session('user')->id_oferta==8 or session('user')->id_oferta==15 )
 					<div class="form-group">
 						<label class="col-sm-4 control-label" for="oferta_educativa">* OFERTA EDUCATIVA</label>
 						<div class="col-sm-5">
@@ -271,13 +259,13 @@ Ninguno -》 2-3EGB
 							</select>
 						</div>
 					</div>
-					@else
+				@else
 					<input type="hidden" name="oferta_educativa" value="{{ session('user')->id_oferta }}">
 					@endif
 				</div>
 
 				<div class="form-horizontal">	
-					@if (session('user')->id_oferta==2 or session('user')->id_oferta==10)
+					@if (session('user')->id_oferta==2 or session('user')->id_oferta==10 )
 					<div class="form-group">
 						<label class="col-sm-4 control-label" for="id_docente">DOCENTE-INSTITUCION</label>
 						<div class="col-sm-6">
@@ -289,7 +277,7 @@ Ninguno -》 2-3EGB
 							<input type="hidden" name="id_docente" value="{{ $id_docente }}">
 						</div>
 					</div>
-					@elseif (session('user')->id_oferta==8 or session('user')->id_oferta==15)
+					@elseif (session('user')->id_oferta==8 or session('user')->id_oferta==15  or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==17 )
 					<div class="form-group">
 						<label class="col-sm-4 control-label" for="id_institucion">* INSTITUCIÓN</label>
 						<div class="col-sm-5">
@@ -382,7 +370,7 @@ Ninguno -》 2-3EGB
 						</div>
 					</div>
 				</div>
-				@if (session('user')->id_oferta==8 or session('user')->id_oferta==15)
+			@if (session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==17)
 				<div class="form-horizontal">
 					<div class="form-group">
 					    <label for="lugar" class="col-sm-4 control-label">* Estudiante atendido en:</label>
@@ -401,6 +389,7 @@ Ninguno -》 2-3EGB
 					</div>
 				</div>
 				@endif
+
 				<div class="form-horizontal">
 				    <label for="asistencia" class="col-sm-4 control-label">* ASISTENCIA</label>
 				    <div class="col-sm-5 alert alert-warning" role="alert">
@@ -421,7 +410,7 @@ Ninguno -》 2-3EGB
 		</div>
 		<div class="panel-footer">
 			<div>
-				<a href="{{ route('matricularInscrito') }}" class="btn btn-success btn-sm" 
+				<a href="{1703017846{ route('matricularInscrito') }}" class="btn btn-success btn-sm" 
                     onclick="event.preventDefault(); document.getElementById('frm-matricular').submit();">
                     Matricular
                 </a>

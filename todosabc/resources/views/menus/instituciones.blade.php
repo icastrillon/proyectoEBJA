@@ -19,7 +19,7 @@
 			</div>
 		@endif
 
-		@if (isset($ies) and $ies->count() == 0 or session('user')->id_oferta==8 or session('user')->id_oferta==15)
+		@if (isset($ies) and $ies->count() == 0 or session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==17 )
 		<a type="button" class="btn btn-success btn-sm" href="{{ url('instituciones/nueva') }}">Nueva Institución</a><br><br>
 		@endif
 	</div>
