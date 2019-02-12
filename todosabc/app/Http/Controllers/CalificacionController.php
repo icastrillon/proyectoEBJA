@@ -63,8 +63,6 @@ class CalificacionController extends Controller
   //        ->where('id_oferta', $mat->id_oferta)
     //      ->orderBy('id')
       //    ->get();
-
-
           if($mat->fase1==null || $mat->fase1==false){
           	$calificaciones_bachillerato = DB::table('todosabc.calificaciones_bachillerato')
           	->where('id_matriculado', $mat->id)
@@ -86,16 +84,16 @@ class CalificacionController extends Controller
           	->delete();
           }
       }
- 
+
       return redirect()->route('calificaciones_prebachillerato');
     }
 
-	public function bachillerato(Request $request){	
+	public function bachillerato(Request $request){
 		DB::statement("UPDATE todosabc.calificaciones_bachillerato SET estado = 'D' WHERE desertado = true AND estado IS NULL");
 
 		DB::statement("DELETE FROM todosabc.calificaciones_bachillerato WHERE id IN (SELECT id FROM (SELECT id, ROW_NUMBER() OVER (partition BY id_usuario, id_matriculado, id_materia_oferta, id_oferta_fase order by id desc) AS rnum FROM todosabc.calificaciones_bachillerato ) t WHERE t.rnum > 1)");
 
-		$request->session()->put('estadoK', 0);	
+		$request->session()->put('estadoK', 0);
 		$this->cargarInstitucionesDelUsuario();
 		$fase = FaseOferta::find($request->input('id_fase'));
 		$materia_oferta = MateriaOferta::find($request->input('bloque'));
@@ -105,7 +103,7 @@ class CalificacionController extends Controller
 		$paralelo = $request->input('par');
 
 		$this->cargarEstudiantesBachillerato($materia_oferta, $docente->id, $paralelo, $fase);
-		
+
 		if($request->has('descargar')){
 			$pdf = PDF::loadView('calificaciones.pdfs.pdf-bachillerato', ['ie' => $this->ie,
 					   'estudiantes' => $this->calificaciones_bachillerato,
@@ -184,7 +182,7 @@ class CalificacionController extends Controller
 		                   'docentes_asignaturas' => $this->docentes_asignaturas,
 		                  ]);
       	}else{
-			view()->share(['fases' => $this->fases, 
+			view()->share(['fases' => $this->fases,
 						   'tiene_fase' => $tiene_fase,
 						   'id_fase' => $id_fase,
 						   'docentes_asignaturas' => $this->docentes_asignaturas,
@@ -203,7 +201,12 @@ class CalificacionController extends Controller
 
 	public function prebasica(Request $request){
 		if($request->has('token') and $request->input('token')==session('token')){
-			DB::statement("UPDATE todosabc.calificaciones_basica SET estado = 'D' WHERE desertado = true AND estado IS NULL");
+
+			CalificacionBasica::where('desertado',true)
+			->where('estado',null)
+			->update(['estado' =>'D']);
+
+			//DB::statement("UPDATE todosabc.calificaciones_basica SET estado = 'D' WHERE desertado = true AND estado IS NULL");
 
 			DB::statement("DELETE FROM todosabc.calificaciones_basica WHERE id IN (SELECT id FROM (SELECT id, ROW_NUMBER() OVER (partition BY id_usuario, id_matriculado, id_materia_oferta, id_fase order by id desc) AS rnum FROM todosabc.calificaciones_basica ) t WHERE t.rnum > 1)");
 
@@ -242,7 +245,13 @@ class CalificacionController extends Controller
 	}
 
 	public function basica(Request $request){
-		DB::statement("UPDATE todosabc.calificaciones_basica SET estado = 'D' WHERE desertado = true AND estado IS NULL");
+
+
+			CalificacionBasica::where('desertado',true)
+			->where('estado',null)
+			->update(['estado' =>'D']);
+
+		//DB::statement("UPDATE todosabc.calificaciones_basica SET estado = 'D' WHERE desertado = true AND estado IS NULL");
 
 		DB::statement("DELETE FROM todosabc.calificaciones_basica WHERE id IN (SELECT id FROM (SELECT id, ROW_NUMBER() OVER (partition BY id_usuario, id_matriculado, id_materia_oferta, id_fase order by id desc) AS rnum FROM todosabc.calificaciones_basica ) t WHERE t.rnum > 1)");
 
@@ -255,7 +264,7 @@ class CalificacionController extends Controller
 		$paralelo = $request->input('par');
 
 		$this->cargarEstudiantesBasica($materia_oferta, $docente->id, $paralelo);
-		
+
 		if($request->has('descargar')){
 			$pdf = PDF::loadView('calificaciones.pdfs.pdf-basica', ['ie' => $this->ie,
 					   'estudiantes' => $this->calificaciones_basica,
@@ -352,13 +361,13 @@ class CalificacionController extends Controller
 			}
 
 			// estudiantes id_oferta=11
-			
+
 			$estudiantes_post_m3_cont = DB::table('todosabc.matriculados')
 			->where('id_docente', $docente[0]->id)
 			->where('id_oferta', 11)
 			->where('todosabc.matriculados.asiste_con_frecuencia', true)
 			 ->get();
-	
+
 			$materias_m3_cont = null;
 
 			if ($estudiantes_post_m3_cont->count()>0){
@@ -374,9 +383,9 @@ class CalificacionController extends Controller
 			->where('id_oferta', 12)
 			->where('todosabc.matriculados.asiste_con_frecuencia', true)
 			->get();
-			
+
 				$materias_m4_cont = null;
-			
+
 			// estudiantes id_oferta=12
 			if ($estudiantes_post_m4_cont->count()>0){
 				$materias_m4_cont = DB::table('todosabc.materias_oferta')
@@ -441,6 +450,7 @@ class CalificacionController extends Controller
 	}
 
 	public function guardarBachillerato(Request $request){
+
 		$this->cargarInstitucionesDelUsuario();
 		$fase = FaseOferta::find($request->input('id_fase'));
 		$materia_oferta = MateriaOferta::find($request->input('id_materia_oferta'));
@@ -474,7 +484,7 @@ class CalificacionController extends Controller
 			}else{
 				$k->desertado = $request->input('ds-'.$codin);
 			}
-    		
+
     		$k->estado = $request->input('hem-'.$codin);
     		$k->nota_final = $request->input('hnf-'.$codin);
     		$k->supletorio = $request->input('hsup-'.$codin);
@@ -487,39 +497,38 @@ class CalificacionController extends Controller
     			$k->id_materia_oferta_gracia = -1;
     		}
 
-			CalificacionBachillerato::where('id_matriculado', $k->id_matriculado)
-			->where('id_oferta_fase', $fase->id)
-			->orderby('id_matriculado','desc')
-			->update(['id_materia_oferta_gracia' => $k->id_materia_oferta_gracia]);
-			
-   	
 			if($k->desertado==true){
 				CalificacionBachillerato::where('id_matriculado', $k->id_matriculado)
 				->where('id_oferta_fase', $fase->id)
-				->orderby('id_matriculado','desc')
-				->update(['fecha_registro' => date('Y-m-d h:m:s'),'desertado' => true]);
-						
+				->update(['fecha_registro' => date('Y-m-d h:m:s'),'desertado' => true,'id_materia_oferta_gracia' => $k->id_materia_oferta_gracia]);
+
 			}else{
 				CalificacionBachillerato::where('id_matriculado', $k->id_matriculado)
 				->where('id_oferta_fase', $fase->id)
-				->orderby('id_matriculado','desc')
-				->update(['fecha_registro' => date('Y-m-d h:m:s'),'desertado' => false]);
-				
+				->update(['fecha_registro' => date('Y-m-d h:m:s'),'desertado' => false,'id_materia_oferta_gracia' => $k->id_materia_oferta_gracia]);
+
 
 				$no_desertado = Matriculado::find($k->id_matriculado);
 				$no_desertado->razon_desercion = null;
 				$no_desertado->update();
 			}
 
-    		$k->save();
+       		   $k->save();
+
 		}
 
+	//	for ($i=0;$i<=5;$i++)
+	//	{
+		DB::beginTransaction();
 		DB::statement("UPDATE todosabc.calificaciones_bachillerato SET estado = 'D' WHERE desertado = true AND estado IS NULL");
+		DB::commit();
 
+	DB::beginTransaction();
 		DB::statement("DELETE FROM todosabc.calificaciones_bachillerato WHERE id IN (SELECT id FROM (SELECT id, ROW_NUMBER() OVER (partition BY id_usuario, id_matriculado, id_materia_oferta, id_oferta_fase order by id desc) AS rnum FROM todosabc.calificaciones_bachillerato ) t WHERE t.rnum > 1)");
-
+		DB::commit();
+	//}
 		$this->cargarEstudiantesBachillerato($materia_oferta, $docente->id, $paralelo, $fase);
-		
+
 		if($request->has('descargar')){
 			$pdf = PDF::loadView('calificaciones.pdfs.pdf-bachillerato', ['ie' => $this->ie,
 					   'estudiantes' => $this->calificaciones_bachillerato,
@@ -544,7 +553,10 @@ class CalificacionController extends Controller
 					  ]);
 		}
 
+
 		return view('calificaciones.bachillerato');
+
+
 	}
 
 	public function guardarBasica(Request $request){
@@ -582,7 +594,7 @@ class CalificacionController extends Controller
 			}else{
 				$k->desertado = $request->input('ds-'.$codin);
 			}
-    		
+
     		$k->estado = $request->input('hem-'.$codin);
     		$k->nota_final = $request->input('hnf-'.$codin);
     		$k->supletorio = $request->input('hsup-'.$codin);
@@ -597,10 +609,14 @@ class CalificacionController extends Controller
 
 			CalificacionBasica::where('id_matriculado', $k->id_matriculado)
 			->update(['id_materia_oferta_gracia' => $k->id_materia_oferta_gracia]);
-	
+
 			if($k->desertado==true){
 				CalificacionBasica::where('id_matriculado', $k->id_matriculado)
 				->update(['fecha_registro' => date('Y-m-d h:m:s'),'desertado' => true]);
+
+			CalificacionBasica::where('estado',null)
+			->update(['estado' =>'D']);
+
 			}else{
 				CalificacionBasica::where('id_matriculado', $k->id_matriculado)
 				->update(['fecha_registro' => date('Y-m-d h:m:s'),'desertado' => false]);
@@ -608,10 +624,20 @@ class CalificacionController extends Controller
 
     		$k->save();
 		}
+		//DB::beginTransaction();
 
-		DB::statement("UPDATE todosabc.calificaciones_basica SET estado = 'D' WHERE desertado = true AND estado IS NULL");
+			//CalificacionBasica::where('desertado',true)
+			//->where('estado',null)
+			//->update(['estado' =>'D']);
+
+		//DB::statement("UPDATE todosabc.calificaciones_basica
+		//	SET estado = 'D' WHERE desertado = true AND estado IS NULL");
+		//DB::commit();
+
+		DB::beginTransaction();
 
 		DB::statement("DELETE FROM todosabc.calificaciones_basica WHERE id IN (SELECT id FROM (SELECT id, ROW_NUMBER() OVER (partition BY id_usuario, id_matriculado, id_materia_oferta, id_fase order by id desc) AS rnum FROM todosabc.calificaciones_basica ) t WHERE t.rnum > 1)");
+		DB::commit();
 
 		$this->cargarEstudiantesBasica($materia_oferta, $docente->id, $paralelo);
 
@@ -666,7 +692,7 @@ class CalificacionController extends Controller
 		$oferta = Oferta::find($materia_oferta->id_oferta);
 		$asignatura = DB::table('materias')
 		->find($materia_oferta->id_materia);
-		
+
 		$this->cargarEstudiantesPost($materia_oferta, $request->input('id_institucion'));
 
 		view()->share(['ie' => $this->ie,
@@ -854,7 +880,7 @@ class CalificacionController extends Controller
 				$k->quimestre_1_examen = 0;
 				$k->quimestre_2_parcial_1 = 0;
 				$k->quimestre_2_parcial_2 = 0;
-				$k->quimestre_2_examen = 0;  	
+				$k->quimestre_2_examen = 0;
 				$k->id_docente = $id_docente;
 
 				$desertados = CalificacionBachillerato::where('id_matriculado', $estudiante->id)
@@ -880,7 +906,7 @@ class CalificacionController extends Controller
 				if($gracias->count() == 0){
 					$k->id_materia_oferta_gracia = 1;
 				}
-				
+
 				$k->supletorio = 0;
 				$k->remedial = 0;
 				$k->gracia = 0;
@@ -923,7 +949,7 @@ class CalificacionController extends Controller
 				$k->quimestre_2_parcial_2 = 0;
 				$k->quimestre_2_parcial_3 = 0;
 				$k->quimestre_2_examen = 0;
-				$k->id_fase = 1;  	
+				$k->id_fase = 1;
 				$k->id_docente = $id_docente;
 
 				$desertados = CalificacionBasica::where('id_matriculado', $estudiante->id)
@@ -942,12 +968,12 @@ class CalificacionController extends Controller
 				->where('gracia', '>', 0)
 				->get();
 
-				
+
 
 				if($gracias->count() == 0){
 					$k->id_materia_oferta_gracia = 1;
 				}
-				
+
 				$k->supletorio = 0;
 				$k->remedial = 0;
 				$k->gracia = 0;
@@ -1064,7 +1090,7 @@ class CalificacionController extends Controller
 
     private function cargarDocentesAsignaturas(){
     	if(session('user')->id_oferta==6 or session('user')->id_oferta==13){
-    		$this->docentes_asignaturas = DB::select("select ca.institucion, m.paralelo, (d.apellidos || ' ' || d.nombres) as docente, ma.nombre as asignatura from todosabc.usuarios u, todosabc.instituciones ie, todosabc.docentes d, codigos_amie ca, todosabc.matriculados m, todosabc.materias_oferta mo, materias ma, 
+    		$this->docentes_asignaturas = DB::select("select ca.institucion, m.paralelo, (d.apellidos || ' ' || d.nombres) as docente, ma.nombre as asignatura from todosabc.usuarios u, todosabc.instituciones ie, todosabc.docentes d, codigos_amie ca, todosabc.matriculados m, todosabc.materias_oferta mo, materias ma,
     		todosabc.calificaciones_basica b where u.id = ie.id_usuario and ie.id = d.id_institucion and ie.amie = ca.amie and
 			ie.id = m.id_institucion and mo.id_oferta = u.id_oferta and mo.id_materia = ma.id and m.id = b.id_matriculado and d.id = b.id_docente and mo.id = b.id_materia_oferta and u.id = :idus group by ca.institucion, m.paralelo, d.apellidos, d.nombres, ma.nombre order by ca.institucion, m.paralelo, docente, asignatura;", ['idus' => session('user')->id]);
     	}else if(session('user')->id_oferta==7 or session('user')->id_oferta==14){
