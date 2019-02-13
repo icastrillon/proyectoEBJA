@@ -10,7 +10,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">Paso 2: Docentes > Nuevo Docente</div>
 			<div class="panel-body">
-				<form id="frm-guardar" action="{{ route('guardarDoc') }}" method="POST">                    
+				<form id="frm-guardar" action="{{ route('guardarDoc') }}" method="POST">
                     {{ csrf_field() }}
 					<div class="form-horizontal">
 						<div class="form-group">
@@ -98,7 +98,7 @@
 					    	¿El Docente en qué clasificación se encuentra?
 					        <div class="form-check form-check-inline">
 							  	<select class="form-control" id="clasificacion" name="clasificacion" style="width: 450px; font-size: 10px;" value="{{ $docente->clasificacion }}">
-					    			<option value="Docente Nombramiento con Horas extra">Docente Nombramiento con Horas extra</option> 
+					    			<option value="Docente Nombramiento con Horas extra">Docente Nombramiento con Horas extra</option>
 									<option value="Docente Ed. Básica Media - Post con Horas extra">Docente Ed. Básica Media - Post con Horas extra</option>
 									<option value="Docente Ed. Básica Media - Post sin Horas extra">Docente Ed. Básica Media - Post sin Horas extra</option>
 									<option value="Docente Básica Superior Intensiva con Horas extra">Docente Básica Superior Intensiva con Horas extra</option>
@@ -108,7 +108,7 @@
 					    </div>
 					</div>
 
-					@elseif(session('user')->id_oferta==16  or session('user')->id_oferta==17 )
+					@elseif(session('user')->id_oferta==16  or session('user')->id_oferta==17 or session('user')->id_oferta==22 or session('user')->id_oferta==23 )
 					<div class="form-horizontal">
 					    <label for="clasificacion" class="col-sm-3 control-label"><span style="color: red; font-weight: bold; font-size: 20px;">--></span> CLASIFICACIÓN:</label>
 					    <div class="col-sm-7 alert alert-warning" role="alert">
@@ -128,12 +128,12 @@
 				</form>
 			</div>
 			<div class="panel-footer">
-				<a href="{{ route('guardarDoc') }}" class="btn btn-primary btn-sm" 
+				<a href="{{ route('guardarDoc') }}" class="btn btn-primary btn-sm"
                     onclick="event.preventDefault(); document.getElementById('frm-guardar').submit();">
                     Guardar Docente
                 </a>
                 <a href="{{ route('docentesUsuario') }}" class="btn btn-default btn-sm">Cancelar</a>
-			</div>					
+			</div>
 		</div>
 	</div>
 @endsection

@@ -10,7 +10,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">Paso 2: Docentes > Docente Seleccionado</div>
 			<div class="panel-body">
-				<form id="frm-modificar" action="{{ route('modificarDoc') }}" method="POST">                    
+				<form id="frm-modificar" action="{{ route('modificarDoc') }}" method="POST">
                     {{ csrf_field() }}
 					<div class="form-horizontal">
 						<div class="form-group">
@@ -92,7 +92,7 @@
 					<div class="form-horizontal">
 					    <label for="clasificacion" class="col-sm-3 control-label"><span style="color: red; font-weight: bold; font-size: 20px;">--></span> CLASIFICACIÓN:</label>
 					    <div class="col-sm-7 alert alert-warning" role="alert">
-					    	¿El Docente en qué clasificación se encuentra?					        
+					    	¿El Docente en qué clasificación se encuentra?
 						  	<select class="form-control" id="clasificacion" name="clasificacion" style="width: 450px; font-size: 10px;" value="{{ $docente->clasificacion }}">
 				    			<option @if($docente->clasificacion=='Docente Nombramiento con Horas extra')
 				    				selected="selected"
@@ -117,11 +117,11 @@
 					    </div>
 					</div>
 
-					@elseif(session('user')->id_oferta==16 or session('user')->id_oferta==17  )
+					@elseif(session('user')->id_oferta==16 or session('user')->id_oferta==17  or  session('user')->id_oferta==22 or session('user')->id_oferta==23 )
 					<div class="form-horizontal">
 					    <label for="clasificacion" class="col-sm-3 control-label"><span style="color: red; font-weight: bold; font-size: 20px;">--></span> CLASIFICACIÓN:</label>
 					    <div class="col-sm-7 alert alert-warning" role="alert">
-					    	¿El Docente en qué clasificación se encuentra?					        
+					    	¿El Docente en qué clasificación se encuentra?
 						  	<select class="form-control" id="clasificacion" name="clasificacion" style="width: 450px; font-size: 10px;" value="{{ $docente->clasificacion }}">
 				    			<option @if($docente->clasificacion=='Docente Post Alfabetización')
 				    				selected="selected"
@@ -143,12 +143,12 @@
 				</form>
 			</div>
 			<div class="panel-footer">
-				<a href="{{ route('modificarDoc') }}" class="btn btn-primary btn-sm" 
+				<a href="{{ route('modificarDoc') }}" class="btn btn-primary btn-sm"
                     onclick="event.preventDefault(); document.getElementById('frm-modificar').submit();">
                     Guardar Cambios
                 </a>
                 <a href="{{ route('docentesUsuario') }}" class="btn btn-default btn-sm">Cancelar</a>
-			</div>					
+			</div>
 		</div>
 	</div>
 @endsection

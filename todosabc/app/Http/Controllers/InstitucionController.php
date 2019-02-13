@@ -12,7 +12,7 @@ class InstitucionController extends Controller
 	private $amies;
 
     public function index()
-    {    	
+    {
         $this->obtenerInstitucionesDelUsuario();
         $this->cargarAmiesUsuario();
     	return view('menus.instituciones', ['ies' => $this->ies,
@@ -50,7 +50,7 @@ class InstitucionController extends Controller
             $ie->delete();
             $msgIE = 'Institución Educativa '.$ie->amie.' eliminada exitosamente';
             $request->session()->put('estadoIE', 200);
-            $request->session()->put('msgIE', $msgIE);            
+            $request->session()->put('msgIE', $msgIE);
         }
 
         return redirect()->route('institucionesUsuario');
@@ -59,7 +59,49 @@ class InstitucionController extends Controller
     public function buscar(Request $request)
     {
         $opcion = $request->input('accion');
-        $codigo_amie = $request->input('cod_amie');        
+        $codigo_amie = $request->input('cod_amie');
+        $codigo_amie_cpl=$request->input('cod_amie');
+
+        if(session('user')->id=22 ){
+            if($codigo_amie){
+            $amie = DB::table('codigos_amie')
+            ->where('amie', '04H00020')
+            ->where('zona', session('user')->zona);
+
+            if($amie){
+                if($opcion=='nue_ie'){
+                    $msgIE = '';
+                    $request->session()->put('estadoIE', 301);
+                    $request->session()->put('msgIE', $msgIE);
+                    $ie = new Institucion;
+                    $ie->id_usuario = session('user')->id;
+                    $ie->fecha_registro = date('d-m-Y h:i:s');
+                    $ie->amie = $amie->amie;
+                    return view('instituciones.nueva', ['ie' => $ie, 'amie' => $amie]);
+                }else{
+                    $msgIE = '';
+                    $request->session()->put('estadoIE', 301);
+                    $request->session()->put('msgIE', $msgIE);
+                    $ie = Institucion::find($request->input('id_institucion'));
+                    $ie->amie = $amie->amie;
+                    return view('instituciones.modificar', ['ie' => $ie, 'amie' => $amie]);
+                }
+            }
+            else{
+                $msgIE = 'Debe ingresar un código AMIE válido';
+                $request->session()->put('estadoIE', 500);
+                $request->session()->put('msgIE', $msgIE);
+                if($opcion=='nue_ie'){
+                    return redirect()->route('nuevaIE');
+                }else{
+                    return redirect('instituciones/id/'.$request->input('id_institucion'));
+                }
+            }
+        }
+    }
+
+
+
         if($codigo_amie){
             $amie = DB::table('codigos_amie')
             ->where('amie', $codigo_amie)
@@ -88,12 +130,12 @@ class InstitucionController extends Controller
                 $msgIE = 'Debe ingresar un código AMIE válido';
                 $request->session()->put('estadoIE', 500);
                 $request->session()->put('msgIE', $msgIE);
-                if($opcion=='nue_ie'){                    
+                if($opcion=='nue_ie'){
                     return redirect()->route('nuevaIE');
                 }else{
                     return redirect('instituciones/id/'.$request->input('id_institucion'));
                 }
-            }            
+            }
         }else{
             $msgIE = 'Debe ingresar un código AMIE válido';
             $request->session()->put('estadoIE', 500);
@@ -161,7 +203,7 @@ class InstitucionController extends Controller
     	$institucion->update();
     	$msgIE = "Los datos de la Institución educativa fueron actualizados exitosamente";
     	$request->session()->put('estadoIE', 200);
-    	$request->session()->put('msgIE', $msgIE);	    	
+    	$request->session()->put('msgIE', $msgIE);
     	return redirect()->route('institucionesUsuario');
     }
 
@@ -238,7 +280,7 @@ class InstitucionController extends Controller
         ->whereIn('amie', $codigos)
         ->get();
 
-        if($amies){         
+        if($amies){
             foreach ($amies as $key => $value) {
                 $amies[$value->amie] = $amies[$key];
                 unset($key);

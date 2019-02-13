@@ -37,12 +37,12 @@ class DocenteController extends Controller
 
     public function eliminar(Request $request){
         $id_docente = $request->input('id');
-        if(isset($id_docente)) { 
+        if(isset($id_docente)) {
             $docente = Docente::find($id_docente);
             $docente->delete();
             $msgDoc = "Docente eliminado/a exitosamente";
             $request->session()->put('estadoDoc', 200);
-            $request->session()->put('msgDoc', $msgDoc);          
+            $request->session()->put('msgDoc', $msgDoc);
             return redirect()->route('docentesUsuario');
         }
     }
@@ -85,7 +85,13 @@ class DocenteController extends Controller
             $docente->clasificacion = $request->input('clasificacion');
         }
 
-        else if(session('user')->id_oferta==16  or session('user')->id_oferta==17)       
+        else if(session('user')->id_oferta==16  or session('user')->id_oferta==17 )
+        {
+            $docente->clasificacion = $request->input('clasificacion');
+        }
+
+
+        else if(session('user')->id_oferta==22  or session('user')->id_oferta==23 )
         {
             $docente->clasificacion = $request->input('clasificacion');
         }
@@ -96,7 +102,7 @@ class DocenteController extends Controller
 
         if(session('user')->id_oferta!=2 and session('user')->id_oferta!=8 and session('user')->id_oferta!=9){
             $docente->apellidos = $apellidos;
-            $docente->nombres = $nombres;                
+            $docente->nombres = $nombres;
         }
 
     	$docente->update();
@@ -160,7 +166,8 @@ class DocenteController extends Controller
         }
 
 
-        else if(session('user')->id_oferta==16)       
+        else if(session('user')->id_oferta==16 or session('user')->id_oferta==22
+            or session('user')->id_oferta==23 )
         {
             $docente->clasificacion = $request->input('clasificacion');
         }
@@ -201,7 +208,7 @@ class DocenteController extends Controller
 
     	$docente = new Docente;
     	$docente->id_institucion = $id_institucion;
-        
+
         $ie = DB::table('todosabc.instituciones')
         ->join('codigos_amie', 'todosabc.instituciones.amie', '=', 'codigos_amie.amie')
         ->select('todosabc.instituciones.*', 'codigos_amie.institucion', 'codigos_amie.zona')
@@ -214,7 +221,7 @@ class DocenteController extends Controller
             $docente->cedula = session('user')->usuario;
         }
 
-        return view('docentes.nuevo', ['docente' => $docente, 
+        return view('docentes.nuevo', ['docente' => $docente,
                                        'ie' => $ie,
                                        'ies' => $this->ies,
                                        ]);

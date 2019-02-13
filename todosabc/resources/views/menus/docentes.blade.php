@@ -2,27 +2,27 @@
 
 @section('content')
 <div class="container">
-	<div>		
+	<div>
 		@if (session('estadoDoc')===200)
 			<div class="alert alert-success alert-dismissible" role="alert">
 				{{ session('msgDoc') }}
-	            @component('componentes/limpiar_alerta_doc') 
+	            @component('componentes/limpiar_alerta_doc')
 
 				@endcomponent
 			</div>
 		@endif
-		@if (isset($docentes) and $docentes->count() == 0 or session('user')->id_oferta==6 or session('user')->id_oferta==7 or session('user')->id_oferta==8 or session('user')->id_oferta==13 or session('user')->id_oferta==14 or session('user')->id_oferta==15 
+		@if (isset($docentes) and $docentes->count() == 0 or session('user')->id_oferta==6 or session('user')->id_oferta==7 or session('user')->id_oferta==8 or session('user')->id_oferta==13 or session('user')->id_oferta==14 or session('user')->id_oferta==15
 		or session('user')->id_oferta==20 or session('user')->id_oferta==21)
 		<a type="button" class="btn btn-success btn-sm" href="{{ url('docentes/nuevo') }}">Nuevo Docente</a>
 		<br><br>
 		@endif
 	</div>
-	<div class="panel panel-primary">		
+	<div class="panel panel-primary">
 		<div class="panel-heading">Paso 2: Docentes > Docentes Registrados</div>
-		<div class="panel-body">			
+		<div class="panel-body">
 		    <table class="table table-hover table-condensed table-responsive mi_tabla">
 		    	<thead>
-		    		<tr>    			
+		    		<tr>
 		    			<th>N°</th>
 		    			<th>ZONA</th>
 		    			<th>CÉDULA</th>
@@ -32,7 +32,7 @@
 		    			<th>EMAIL</th>
 		    			@if (session('user')->id_oferta==2)
 		    			<th>TIENE VOLUNTARIO</th>
-		    			@elseif (session('user')->id_oferta==10 or  session('user')->id_oferta==17 or session('user')->id_oferta==16 )
+		    			@elseif (session('user')->id_oferta==10 or  session('user')->id_oferta==17 or session('user')->id_oferta==16 or session('user')->id_oferta==22 or session('user')->id_oferta==23 )
 		    			<th>CLASIFICACIÓN</th>
 		    			@endif
 		    			<th>FECHA REGISTRO</th>
@@ -52,7 +52,7 @@
 			    				<td>{{ $doc->email }}</td>
 			    				@if (session('user')->id_oferta==2)
 			    				<td>@if($doc->tiene_voluntario===true) SI @else NO @endif</td>
-			    				@elseif (session('user')->id_oferta==10  or session('user')->id_oferta==17 or session('user')->id_oferta==16 )
+			    				@elseif (session('user')->id_oferta==10  or session('user')->id_oferta==17 or session('user')->id_oferta==16  or session('user')->id_oferta==22 or session('user')->id_oferta==23)
 			    				<td>{{ $doc->clasificacion }}</td>
 			    				@endif
 								<td>{{ $doc->fecha_registro }}</td>
@@ -68,6 +68,6 @@
 			    </tbody>
 			</table>
 		</div>
-	</div>    
+	</div>
 </div>
 @endsection

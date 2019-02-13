@@ -15,7 +15,7 @@
     <link href="{{ asset('css/alfa.css') }}" rel="stylesheet">
 
     <style>
-        
+
         .mi_tabla {
             overflow-x: hidden !important;
             height: 400px !important;
@@ -94,13 +94,13 @@
     <script src="{{ asset('js/todos.js') }}"></script>
     @if(is_null(session('user')))
 
-    @elseif(session('user')->id_oferta==2 or session('user')->id_oferta==10 or session('user')->id_oferta==16 or session('user')->id_oferta==17 )
+    @elseif(session('user')->id_oferta==2 or session('user')->id_oferta==10 or session('user')->id_oferta==16 or session('user')->id_oferta==17 or session('user')->id_oferta==22 or session('user')->id_oferta==23  )
     <script src="{{ asset('js/alfa.js') }}"></script>
-    @elseif(session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19)
+    @elseif(session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==24)
     <script src="{{ asset('js/post.js') }}"></script>
-    @elseif(session('user')->id_oferta==6 or session('user')->id_oferta==13 or session('user')->id_oferta==20)
+    @elseif(session('user')->id_oferta==6 or session('user')->id_oferta==13 or session('user')->id_oferta==20 or session('user')->id_oferta==25)
     <script src="{{ asset('js/basica.js') }}"></script>
-    @elseif(session('user')->id_oferta==7 or session('user')->id_oferta==14  or session('user')->id_oferta==21)
+    @elseif(session('user')->id_oferta==7 or session('user')->id_oferta==14  or session('user')->id_oferta==21 or session('user')->id_oferta==26)
     <script src="{{ asset('js/bachillerato.js') }}"></script>
     @endif
 </body>

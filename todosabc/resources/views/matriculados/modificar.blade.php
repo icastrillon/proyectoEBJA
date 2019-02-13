@@ -55,7 +55,7 @@
 								<span class="form-control lbl" id="nacimiento">{{ $matriculado->fecha_nacimiento }}</span>
 								<input type="hidden" name="fecha_nacimiento" value="{{ $matriculado->fecha_nacimiento }}">
 							@endif
-							<input type="hidden" name="fecha_inscripcion" value="{{ $matriculado->fecha_inscripcion }}">						
+							<input type="hidden" name="fecha_inscripcion" value="{{ $matriculado->fecha_inscripcion }}">
 						</div>
 					</div>
 				</div>
@@ -66,9 +66,9 @@
 							@if ($matriculado->tipo_documento_identidad!='CEDULA')
 								<select class="form-control" id="genero" name="genero" value="{{ $matriculado->genero }}">
 								@foreach ($generos as $val)
-									<option value="{{ $val->nombre }}" 
+									<option value="{{ $val->nombre }}"
 										@if ($val->nombre == $matriculado->genero)
-										selected="selected" 
+										selected="selected"
 										@endif
 										>{{ $val->nombre }}</option>
 								@endforeach
@@ -88,9 +88,9 @@
 								<select class="form-control" id="estado_civil" name="estado_civil" value="{{ $matriculado->estado_civil }}">
 									<option value="-1">--Seleccionar--</option>
 									@foreach ($estados_civiles as $val)
-									<option value="{{ $val->estado_civil }}" 
+									<option value="{{ $val->estado_civil }}"
 										@if ($val->estado_civil == $matriculado->estado_civil)
-										selected="selected" 
+										selected="selected"
 										@endif
 										>{{ $val->estado_civil }}</option>
 									@endforeach
@@ -109,9 +109,9 @@
 							<select class="form-control" id="etnia" name="etnia" value="{{ $matriculado->etnia }}">
 								<option value="-1">--Seleccionar--</option>
 								@foreach ($etnias as $val)
-								<option value="{{ $val->etnia }}" 
+								<option value="{{ $val->etnia }}"
 									@if ($val->etnia == $matriculado->etnia)
-									selected="selected" 
+									selected="selected"
 									@endif
 									>{{ $val->etnia }}</option>
 								@endforeach
@@ -126,9 +126,9 @@
 							<select class="form-control" id="situacion_laboral" name="situacion_laboral" value="{{ $matriculado->situacion_laboral }}">
 								<option value="-1">--Seleccionar--</option>
 								@foreach ($situaciones_laborales as $val)
-								<option value="{{ $val->situacion_laboral }}" 
+								<option value="{{ $val->situacion_laboral }}"
 									@if ($val->situacion_laboral == $matriculado->situacion_laboral)
-									selected="selected" 
+									selected="selected"
 									@endif
 									>{{ $val->situacion_laboral }}</option>
 								@endforeach
@@ -143,9 +143,9 @@
 							<select class="form-control" id="actividad_economica" name="actividad_economica" value="{{ $matriculado->actividad_economica }}">
 								<option value="-1">--Seleccionar--</option>
 								@foreach ($actividades_economicas as $val)
-								<option value="{{ $val->nombre }}" 
+								<option value="{{ $val->nombre }}"
 									@if ($val->nombre == $matriculado->actividad_economica)
-									selected="selected" 
+									selected="selected"
 									@endif
 									>{{ $val->nombre }}</option>
 								@endforeach
@@ -160,9 +160,9 @@
 							<select class="form-control" id="datos_familiares" name="datos_familiares" value="{{ $matriculado->datos_familiares }}">
 								<option value="-1">--Seleccionar--</option>
 								@foreach ($datos_familiares as $val)
-								<option value="{{ $val->datos_familiares }}" 
+								<option value="{{ $val->datos_familiares }}"
 									@if ($val->datos_familiares == $matriculado->datos_familiares)
-									selected="selected" 
+									selected="selected"
 									@endif
 									>{{ $val->datos_familiares }}</option>
 								@endforeach
@@ -178,9 +178,9 @@
 								<select class="form-control" id="nacionalidad" name="nacionalidad" value="{{ $matriculado->nacionalidad }}">
 									<option value="-1">--Seleccionar--</option>
 									@foreach ($nacionalidades as $val)
-									<option value="{{ $val->nacionalidad }}" 
+									<option value="{{ $val->nacionalidad }}"
 										@if ($val->nacionalidad == $matriculado->nacionalidad)
-										selected="selected" 
+										selected="selected"
 										@endif
 										>{{ $val->nacionalidad }}</option>
 									@endforeach
@@ -215,9 +215,9 @@
 							<select class="form-control" id="rezago_educativo" name="rezago_educativo" value="{{ $matriculado->rezago_educativo }}">
 								<option value="-1">--Seleccionar--</option>
 								@foreach ($rezagos_educativos as $val)
-								<option value="{{ $val->rezago_educativo }}" 
+								<option value="{{ $val->rezago_educativo }}"
 									@if ($val->rezago_educativo == $matriculado->rezago_educativo)
-									selected="selected" 
+									selected="selected"
 									@endif
 									>{{ $val->rezago_educativo }}</option>
 								@endforeach
@@ -232,9 +232,9 @@
 							<select class="form-control" id="ultimo_anio_aprobado" name="ultimo_anio_aprobado" value="{{ $matriculado->ultimo_anio_aprobado }}">
 								<option value="-1">--Seleccionar--</option>
 								@foreach ($ultimos_anios_aprobados as $val)
-								<option value="{{ $val->ultimo_anio_aprobado }}" 
+								<option value="{{ $val->ultimo_anio_aprobado }}"
 									@if ($val->ultimo_anio_aprobado == $matriculado->ultimo_anio_aprobado)
-									selected="selected" 
+									selected="selected"
 									@endif
 									>{{ $val->ultimo_anio_aprobado }}</option>
 								@endforeach
@@ -243,7 +243,7 @@
 						<label for="anuncio  font-size: 14px" > * Valide con la documentación del estudiante</label>
 					</div>
 				</div>
-				
+
 				<div class="form-horizontal">
 					@if (session('user')->id_oferta==8 or session('user')->id_oferta==15 )
 					<div class="form-group">
@@ -252,9 +252,9 @@
 							<select class="form-control" id="oferta_educativa" name="oferta_educativa" value="{{ $matriculado->id_oferta }}">
 								<option value="-1">--Seleccionar--</option>
 								@foreach ($ofertas_educativas as $val)
-								<option value="{{ $val->id }}" 
+								<option value="{{ $val->id }}"
 									@if ($val->id == $matriculado->id_oferta)
-									selected="selected" 
+									selected="selected"
 									@endif
 									>{{ $val->nombre }}</option>
 								@endforeach
@@ -265,7 +265,7 @@
 					<input type="hidden" name="oferta_educativa" value="{{ session('user')->id_oferta }}">
 					@endif
 				</div>
-				
+
 				<div class="form-horizontal">
 					@if (session('user')->id_oferta==2 or session('user')->id_oferta==10)
 					<div class="form-group">
@@ -278,7 +278,7 @@
 							@endif
 						</div>
 					</div>
-					@elseif (session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==17)
+					@elseif (session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==17 or session('user')->id_oferta==22 or session('user')->id_oferta==23 or session ('user')->id_oferta==24)
 					<div class="form-group">
 						<label class="col-sm-4 control-label" for="id_institucion">* INSTITUCIÓN</label>
 						<div class="col-sm-5">
@@ -312,9 +312,9 @@
 							<select class="form-control" id="paralelo" name="paralelo" value="{{ $paralelo }}">
 								<option value="-1">--Seleccionar--</option>
 								@foreach ($paralelos as $val)
-								<option value="{{ $val }}" 
+								<option value="{{ $val }}"
 									@if ($val == $paralelo)
-									selected="selected" 
+									selected="selected"
 									@endif
 									>{{ $val }}</option>
 								@endforeach
@@ -330,9 +330,9 @@
 							<select class="form-control" id="nom_zona" name="nom_zona" value="{{ $matriculado->nom_zona }}">
 								<option value="-1">--Seleccionar--</option>
 								@foreach ($zonas as $val)
-								<option value="{{ $val->nombre }}" 
+								<option value="{{ $val->nombre }}"
 									@if ($val->nombre == $matriculado->nom_zona)
-									selected="selected" 
+									selected="selected"
 									@endif
 									>{{ $val->nombre }}</option>
 								@endforeach
@@ -372,7 +372,7 @@
 						</div>
 					</div>
 				</div>
-				@if (session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==17)
+				@if (session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==17 or  session('user')->id_oferta==22 or session('user')->id_oferta==23 or session ('user')->id_oferta==24 )
 				<div class="form-horizontal">
 					<div class="form-group">
 					    <label for="lugar" class="col-sm-4 control-label">* Estudiante atendido en:</label>
@@ -380,9 +380,9 @@
 						    <select class="form-control" id="lugar" name="lugar" value="{{ $lugar }}">
 								<option value="-1">--Seleccionar--</option>
 								@foreach ($lugares_atencion as $val)
-								<option value="{{ $val }}" 
+								<option value="{{ $val }}"
 									@if ($val == $lugar)
-									selected="selected" 
+									selected="selected"
 									@endif
 									>{{ $val }}</option>
 								@endforeach
@@ -391,7 +391,7 @@
 					</div>
 				</div>
 				@endif
-			
+
 				<div class="form-horizontal">
 				    <label for="asistencia" class="col-sm-4 control-label">ASISTENCIA</label>
 				    <div class="col-sm-5 alert alert-warning" role="alert">
@@ -412,7 +412,7 @@
 		</div>
 		<div class="panel-footer">
 			<div>
-				<a href="{{ route('modificarMat') }}" class="btn btn-success btn-sm" 
+				<a href="{{ route('modificarMat') }}" class="btn btn-success btn-sm"
                     onclick="event.preventDefault(); document.getElementById('frm-matricular').submit();">
                     Guardar cambios
                 </a>

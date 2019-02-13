@@ -65,7 +65,7 @@ class MatriculadoController extends Controller
             $mat->razon_desercion = $request->input('rd-'.$codmat);
             $mat->update();
         }
-  
+
         return redirect()->route('matriculados_desertados');
     }
 
@@ -113,7 +113,7 @@ class MatriculadoController extends Controller
             if($no_asiste_con_frecuencia){
                 $matriculado->asiste_con_frecuencia = false;
             }
-        
+
             if($this->validarDatos($matriculado, $request, 'modificar')){
                 $matriculado->update();
                 $msgMat = 'Los datos de '.$matriculado->nombres_aspirantes.' fueron actualizados exitosamente';
@@ -125,15 +125,15 @@ class MatriculadoController extends Controller
                 $request->session()->put('estadoMat', 500);
                 $request->session()->put('msgMat', $msgMat);
                 return redirect('matriculados/seleccionar/modificar/'.$request->input('id_matriculado'));
-            }  
-        }      
+            }
+        }
     }
 
     public function eliminar(Request $request)
     {
         $id_matriculado = $request->input('id');
         $codigo = $request->input('cod');
-        if(isset($id_matriculado)) { 
+        if(isset($id_matriculado)) {
             $inscrito = Inscrito::where('codigo_inscripcion', $codigo)->first();
             $inscrito->estado = '1';
             $inscrito->update();
@@ -142,7 +142,7 @@ class MatriculadoController extends Controller
             ->delete();
             $msgMat = "Participante eliminado/a exitosamente";
             $request->session()->put('estadoMat', 200);
-            $request->session()->put('msgMat', $msgMat);          
+            $request->session()->put('msgMat', $msgMat);
             return redirect()->route('matriculadosUsuario');
         }
     }
@@ -180,8 +180,8 @@ class MatriculadoController extends Controller
                 $request->session()->put('estadoMat', 500);
                 $request->session()->put('msgMat', $msgMat);
                 return redirect('matriculados/seleccionar/inscrito/'.$request->input('id_inscrito'));
-            } 
-        }       
+            }
+        }
     }
 
     public function nuevo(Request $request)
@@ -201,11 +201,11 @@ class MatriculadoController extends Controller
 
     	if($identificacion != null){
             $ids_ofertas = array();
-            
+
             if(session('user')->id_oferta==15){
               array_push($ids_ofertas, 11);
               array_push($ids_ofertas, 12);
-      
+
             }
             else if(session('user')->id_oferta==8){
               array_push($ids_ofertas, 3);
@@ -213,12 +213,6 @@ class MatriculadoController extends Controller
               array_push($ids_ofertas, 5);
 
             }// OFERTAS PARA id=19
-          else if(session('user')->id_oferta==15){
-              array_push($ids_ofertas, 11);
-              array_push($ids_ofertas, 12);
-          
-           }
-
 
               else{
               array_push($ids_ofertas, session('user')->id_oferta);
@@ -287,9 +281,9 @@ class MatriculadoController extends Controller
 
         }else if(isset($apellidos) and $apellidos != ''){
             $this->inscritos = DB::table('todosabc.inscritos')
-            ->where('nombres_aspirantes', 'like', strtoupper($apellidos).'%')  
-            ->where('nom_zona', session('user')->zona) 
-            ->where('estado', '<>', 'MATRICULADO')    
+            ->where('nombres_aspirantes', 'like', strtoupper($apellidos).'%')
+            ->where('nom_zona', session('user')->zona)
+            ->where('estado', '<>', 'MATRICULADO')
             ->get();
         }else{
             $request->session()->put('estadoMat', 301);
@@ -310,8 +304,8 @@ class MatriculadoController extends Controller
                                                 'encontrados' => $encontrados,
                                                ]);
         } else {
-            $parametro = ($identificacion != null) ? $identificacion : $apellidos;            
-            $msgMat = 'El/La ciudadano/a '.$parametro. ' no se encuentra en los Inscritos de la '.session('user')->zona.' del Proyecto EBJA. Debe comunicarse con Planta Central para verificar su inscripción.';           
+            $parametro = ($identificacion != null) ? $identificacion : $apellidos;
+            $msgMat = 'El/La ciudadano/a '.$parametro. ' no se encuentra en los Inscritos de la '.session('user')->zona.' del Proyecto EBJA. Debe comunicarse con Planta Central para verificar su inscripción.';
             $request->session()->put('estadoMat', 600);
             $request->session()->put('msgMat', $msgMat);
             return redirect()->route('nuevoMatriculado');
@@ -414,7 +408,7 @@ class MatriculadoController extends Controller
                                                       'paralelos' => $paralelos,
                                                       ]);
             }else if(session('user')->id_oferta==8 or session('user')->id_oferta==15 or
-             session('user')->id_oferta==17 or session('user')->id_oferta==19 or session('user')->id_oferta==16 )
+             session('user')->id_oferta==17 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==23 or session('user')->id_oferta==24 )
                         {
                 $this->cargarDocentesDeUsuario();
                 return view('matriculados.inscrito', ['inscrito' => $inscrito,
@@ -631,9 +625,9 @@ class MatriculadoController extends Controller
                 $matriculado->id_docente = $request->input('id_docente');
             }
 
-                        
-            else if(session('user')->id_oferta==8 or session('user')->id_oferta==15 or  session('user')->id_oferta==19 or session('user')->id_oferta==16  or session('user')->id_oferta==17)
-            {            
+
+            else if(session('user')->id_oferta==8 or session('user')->id_oferta==15 or  session('user')->id_oferta==19 or session('user')->id_oferta==16  or session('user')->id_oferta==17 or session('user')->id_oferta==23 or session('user')->id_oferta==24 or session('user')->id_oferta==22)
+            {
 
                 if($request->input('lugar')=='-1'){
                     $this->campos_obligaotorios = $this->campos_obligaotorios.'Lugar de Atención,';
@@ -653,7 +647,7 @@ class MatriculadoController extends Controller
         }
 
         else{//si ya existe
-            if(session('user')->id_oferta==8 or session('user')->id_oferta==15 or   session('user')->id_oferta==19 or session('user')->id_oferta==16  or session('user')->id_oferta==17){
+            if(session('user')->id_oferta==8 or session('user')->id_oferta==15 or   session('user')->id_oferta==19 or session('user')->id_oferta==16  or session('user')->id_oferta==17 or session('user')->id_oferta==22 or  session('user')->id_oferta==23 or session('user')->id_oferta==24){
                 if($request->input('lugar')=='-1'){
                     $this->campos_obligaotorios = $this->campos_obligaotorios.'Lugar de Atención,';
                     $datos_validos = false;
@@ -702,8 +696,8 @@ class MatriculadoController extends Controller
               ->where('todosabc.matriculados.id_docente', $docente->id)
               ->orderBy('todosabc.matriculados.id', 'desc')
               ->get();
-          }  	
-      }else if(session('user')->id_oferta==8 or session('user')->id_oferta==15  or  session('user')->id_oferta==19 or session('user')->id_oferta==16  or session('user')->id_oferta==17){
+          }
+      }else if(session('user')->id_oferta==8 or session('user')->id_oferta==15  or  session('user')->id_oferta==19 or session('user')->id_oferta==16  or session('user')->id_oferta==17 or session('user')->id_oferta==23 or session('user')->id_oferta==24 or session('user')->id_oferta==22){
           $ids = [];
           for ($i = 0; $i < $this->ies->count(); $i++) {
               $ids[$i] = $this->ies[$i]->id;
@@ -733,7 +727,7 @@ class MatriculadoController extends Controller
               ->where('todosabc.instituciones.id_usuario', session('user')->id)
               ->orderBy('id', 'desc')
               ->get();
-      }        
+      }
     }
 
     private function cargarInstitucionesDelUsuario()
@@ -749,7 +743,7 @@ class MatriculadoController extends Controller
         if($this->ies){
             $ids = [];
             for ($i = 0; $i < $this->ies->count(); $i++) {
-                $ids[$i] = $this->ies[$i]->id; 
+                $ids[$i] = $this->ies[$i]->id;
             }
 
             $this->docentes = DB::table('todosabc.docentes')
@@ -816,16 +810,17 @@ class MatriculadoController extends Controller
             $this->ofertas_educativas = DB::table('todosabc.ofertas')
             ->whereIn('id', [11,12])
             ->orderBy('nombre')
-            ->get();    
+            ->get();
 
-                       
-        }else if(session('user')->id_oferta==19){
-            $this->ofertas_educativas = DB::table('todosabc.ofertas')
-            ->whereIn('id', [17,16])
-            ->orderBy('nombre')
-            ->get();    
+
         }
-        
+        //else if(session('user')->id_oferta==19){
+          //  $this->ofertas_educativas = DB::table('todosabc.ofertas')
+           // ->whereIn('id', [17,16])
+           // ->orderBy('nombre')
+            //->get();
+       // }
+
         else {
             $this->ofertas_educativas = $this->oferta;
         }
@@ -854,7 +849,7 @@ class MatriculadoController extends Controller
          }
 
     private function cargarEstudiantes(){
-      if(session('user')->id_oferta==6 || session('user')->id_oferta==7 || session('user')->id_oferta==13 || session('user')->id_oferta==14  || session('user')->id_oferta==20 || session('user')->id_oferta==21){
+      if(session('user')->id_oferta==6 || session('user')->id_oferta==7 || session('user')->id_oferta==13 || session('user')->id_oferta==14  || session('user')->id_oferta==20 || session('user')->id_oferta==21 or session('user')->id_oferta==25 or session('user')->id_oferta==26) {
           $this->estudiantes = DB::select('select m.*, oe.nombre as oferta_educativa, ca.amie, ca.institucion, t.estado as estado from todosabc.matriculados m, todosabc.instituciones ie, codigos_amie ca, todosabc.ofertas oe, todosabc.estado_participantes t where t.id_matriculado = m.id and ie.id = m.id_institucion and ie.amie = ca.amie and oe.id = m.id_oferta and ie.id_usuario = :ieid order by m.nombres_aspirantes', ['ieid' => session('user')->id]);
       }else{
           $this->estudiantes = DB::select('select m.*, oe.nombre as oferta_educativa, ca.amie, ca.institucion from todosabc.matriculados m, todosabc.instituciones ie, codigos_amie ca, todosabc.ofertas oe, todosabc.docentes d where ie.id_usuario = :ieid and ie.id = d.id_institucion and ie.amie = ca.amie and d.id = m.id_docente and oe.id = m.id_oferta order by m.nombres_aspirantes', ['ieid' => session('user')->id]);
@@ -862,7 +857,7 @@ class MatriculadoController extends Controller
     }
 
     private function cargarEstudiantesDesertados(){
-      if(session('user')->id_oferta==6 || session('user')->id_oferta==7 || session('user')->id_oferta==13 || session('user')->id_oferta==14 || session('user')->id_oferta==20 || session('user')->id_oferta==21 ){
+      if(session('user')->id_oferta==6 || session('user')->id_oferta==7 || session('user')->id_oferta==13 || session('user')->id_oferta==14 || session('user')->id_oferta==20 || session('user')->id_oferta==21 or session('user')->id_oferta==25 or session('user')->id_oferta==26){
           $this->desertados = DB::select('select m.*, ca.amie, ca.institucion from todosabc.matriculados m, todosabc.instituciones ie, codigos_amie ca where ie.id = m.id_institucion and ie.amie = ca.amie and ie.id_usuario = :ieid and m.asiste_con_frecuencia = :no order by m.nombres_aspirantes', ['ieid' => session('user')->id, 'no' => false]);
 
           $otros_desertados = DB::select("select m.*, ca.amie, ca.institucion from todosabc.matriculados m, todosabc.instituciones ie, codigos_amie ca where ie.id = m.id_institucion and ie.amie = ca.amie and m.id in (select id_matriculado from todosabc.estado_participantes where estado = 'DESERTADO' and id_matriculado in (select m.id from todosabc.matriculados m, todosabc.instituciones ie where ie.id = m.id_institucion and ie.id_usuario = :ieid and m.asiste_con_frecuencia = :no)) order by m.nombres_aspirantes", ['ieid' => session('user')->id, 'no' => true]);
@@ -875,7 +870,7 @@ class MatriculadoController extends Controller
       }else{
           $this->desertados = DB::select('select m.*, ca.amie, ca.institucion from todosabc.matriculados m, todosabc.instituciones ie, todosabc.docentes d, codigos_amie ca where d.id = m.id_docente and ie.id = d.id_institucion and ie.amie = ca.amie and ie.id_usuario = :ieid and m.asiste_con_frecuencia = :no order by m.nombres_aspirantes', ['ieid' => session('user')->id, 'no' => false]);
 
-          if(session('user')->id_oferta==8 || session('user')->id_oferta==15 || session('user')->id_oferta==19 || session('user')->id_oferta==16 || session('user')->id_oferta==17 ){
+          if(session('user')->id_oferta==8 || session('user')->id_oferta==15 || session('user')->id_oferta==19  || session('user')->id_oferta==17  || session('user')->id_oferta==22 ||session('user')->id_oferta==23 || session('user')->id_oferta==24 ){
               $otros_desertados = DB::select("select m.*, ca.amie, ca.institucion from todosabc.matriculados m, todosabc.instituciones ie, todosabc.docentes d, codigos_amie ca where d.id = m.id_docente and ie.id = d.id_institucion and ie.amie = ca.amie and m.id in (select id_matriculado from todosabc.estado_participantes where estado = 'DESERTADO' and id_matriculado in (select mm.id from todosabc.matriculados mm, todosabc.docentes dd, todosabc.instituciones i where dd.id = mm.id_docente and i.id = dd.id_institucion and i.id_usuario = :ieid and mm.asiste_con_frecuencia = :no)) order by mm.nombres_aspirantes", ['ieid' => session('user')->id, 'no' => true]);
 
               if(count($otros_desertados) > 0){
@@ -883,7 +878,7 @@ class MatriculadoController extends Controller
                     array_push($this->desertados, $od);
                 }
               }
-          }else if(session('user')->id_oferta==2 || session('user')->id_oferta==10 ){
+          }else if(session('user')->id_oferta==2 || session('user')->id_oferta==10 || session('user')->id_oferta==16 || session('user')->id_oferta==22){
                 $otros_desertados = DB::select("select m.*, ca.amie, ca.institucion from todosabc.matriculados m, todosabc.instituciones ie, todosabc.docentes d, codigos_amie ca where d.id = m.id_docente and ie.id = d.id_institucion and ie.amie = ca.amie and m.id in (select k.id_matriculado from todosabc.calificaciones_alfa k where (k.modulo_1_desertado = :si or k.modulo_2_desertado = :si) and k.id_matriculado in (select mm.id from todosabc.matriculados mm, todosabc.instituciones i, todosabc.docentes dd where i.id = dd.id_institucion and dd.id = mm.id_docente and i.id_usuario = :ieid and m.asiste_con_frecuencia = :si)) order by m.nombres_aspirantes", ['ieid' => session('user')->id, 'si' => true]);
 
               if(count($otros_desertados) > 0){

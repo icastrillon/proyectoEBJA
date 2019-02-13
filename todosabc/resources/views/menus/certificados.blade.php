@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container">
-	<div class="panel panel-primary">		
+	<div class="panel panel-primary">
 		<div class="panel-heading">Certificados</div>
-		<div class="panel-body">			
+		<div class="panel-body">
 		    <table class="table table-hover table-condensed table-responsive">
 		    	<thead>
-		    		<tr>    			
+		    		<tr>
 		    			<th>N°</th>
 		    			<th>NOMBRES</th>
 		    			<th>IDENTIFICACIÓN</th>
@@ -15,7 +15,7 @@
 		    			<th>OFERTA</th>
 		    			<th>INSTITUCIÓN EDUCATIVA</th>
 		    			<th>ASISTENCIA</th>
-		    			@if (session('user')->id_oferta==2 or session('user')->id_oferta==10)
+		    			@if (session('user')->id_oferta==2 or session('user')->id_oferta==10 or session('user')->id_oferta==16 or session('user')->id_oferta==22)
 		    			<th>FECHA MATRICULACIÓN</th>
 		    			@else
 						<th>PARALELO</th>
@@ -34,7 +34,7 @@
 			    				<td>{{ $mat->oferta_educativa }}</td>
 			    				<td>{{ $mat->amie }} - {{ $mat->institucion }}</td>
 			    				<td>@if ($mat->asiste_con_frecuencia==false) Desertó @else Asiste con frecuencia @endif</td>
-			    				@if (session('user')->id_oferta==2 or session('user')->id_oferta==10 or session('user')->id_oferta==16)
+			    				@if (session('user')->id_oferta==2 or session('user')->id_oferta==10 or session('user')->id_oferta==16 or session('user')->id_oferta==22)
 								<td>{{ $mat->fecha_matriculacion }}</td>
 								@else
 								<td>{{ $mat->paralelo }}</td>
@@ -50,6 +50,6 @@
 			    </tbody>
 			</table>
 		</div>
-	</div>    
+	</div>
 </div>
 @endsection
