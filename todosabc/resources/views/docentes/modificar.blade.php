@@ -123,32 +123,21 @@
 					    <div class="col-sm-7 alert alert-warning" role="alert">
 					    	¿El Docente en qué clasificación se encuentra?					        
 						  	<select class="form-control" id="clasificacion" name="clasificacion" style="width: 450px; font-size: 10px;" value="{{ $docente->clasificacion }}">
-				    			<option @if($docente->clasificacion=='Docente Nombramiento con Horas extra')
+				    			<option @if($docente->clasificacion=='Docente Post Alfabetización')
 				    				selected="selected"
-				    			@endif value="Docente Nombramiento con Horas extra">
-				    			Docente Nombramiento con Horas extra</option>
-				    			<option @if($docente->clasificacion=='Docente Ed. Básica Media - Post con Horas extra')
+				    			@endif value="Docente PostAlfabetización">
+				    			Docente Post Alfabetización</option>
+				    			<option @if($docente->clasificacion=='Docente Básica Superior Intensiva')
 				    				selected="selected"
-				    			@endif value="Docente Ed. Básica Media - Post con Horas extra">
-				    			Docente Ed. Básica Media - Post con Horas extra</option>
-				    			<option @if($docente->clasificacion=='Docente Ed. Básica Media - Post sin Horas extra')
+				    			@endif value="Docente Básica Superior Intensiva">
+				    			Docente Básica Superior Intensiva</option>
+				    			<option @if($docente->clasificacion=='Docente Bachillerato Intensivo')
 				    				selected="selected"
-				    			@endif value="Docente Ed. Básica Media - Post sin Horas extra">Docente Ed. Básica Media - Post sin Horas extra</option>
-				    			<option @if($docente->clasificacion=='Docente Básica Superior Intensiva con Horas extra')
-				    				selected="selected"
-				    			@endif value="Docente Básica Superior Intensiva con Horas extra">
-				    			Docente Básica Superior Intensiva con Horas extra</option>
-				    			<option @if($docente->clasificacion=='Docente Bachillerato Intensivo con Horas extra')
-				    				selected="selected"
-				    			@endif value="Docente Bachillerato Intensivo con Horas extra">
-				    			Docente Bachillerato Intensivo con Horas extra</option>
+				    			@endif value="Docente Bachillerato Intensivo">
+				    			Docente Bachillerato Intensivo</option>
 				    		</select>
 					    </div>
 					</div>
-
-
-
-
 
 					@endif
 				</form>

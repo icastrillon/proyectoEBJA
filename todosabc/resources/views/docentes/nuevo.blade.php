@@ -115,11 +115,9 @@
 					    	¿El Docente en qué clasificación se encuentra?
 					        <div class="form-check form-check-inline">
 							  	<select class="form-control" id="clasificacion" name="clasificacion" style="width: 450px; font-size: 10px;" value="{{ $docente->clasificacion }}">
-					    			<option value="Docente Nombramiento con Horas extra">Docente Nombramiento con Horas extra</option> 
-									<option value="Docente Ed. Básica Media - Post con Horas extra">Docente Ed. Básica Media - Post con Horas extra</option>
-									<option value="Docente Ed. Básica Media - Post sin Horas extra">Docente Ed. Básica Media - Post sin Horas extra</option>
-									<option value="Docente Básica Superior Intensiva con Horas extra">Docente Básica Superior Intensiva con Horas extra</option>
-									<option value="Docente Bachillerato Intensivo con Horas extra">Docente Bachillerato Intensivo con Horas extra</option>
+					    			<option value="Docente Post Alfabetización">Docente Post Alfabetización</option>
+									<option value="Docente Básica Superior">Docente Básica Superior Intensiva </option>
+									<option value="Docente Bachillerato Intensivo">Docente Bachillerato Intensivo</option>
 					    		</select>
 							</div>
 					    </div>

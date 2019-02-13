@@ -39,7 +39,7 @@ class CalificacionController extends Controller
 
       foreach ($ies as $ie) {
       	array_push($ids_ies, $ie->id);
-      }
+     	 }
 
       $matriculados = DB::table('todosabc.matriculados')
       ->whereIn('id_institucion', $ids_ies)
@@ -59,11 +59,10 @@ class CalificacionController extends Controller
           ->orderBy('id')
           ->get();
 
-           $ultimo_anio_aprobado = DB::table('todosabc.matriculados')
-          ->where('id_oferta', $mat->id_oferta)
-          ->orderBy('id')
-          ->get();
-
+//           $ultimo_anio_aprobado = DB::table('todosabc.matriculados')
+  //        ->where('id_oferta', $mat->id_oferta)
+    //      ->orderBy('id')
+      //    ->get();
 
 
           if($mat->fase1==null || $mat->fase1==false){
@@ -87,7 +86,7 @@ class CalificacionController extends Controller
           	->delete();
           }
       }
-      
+ 
       return redirect()->route('calificaciones_prebachillerato');
     }
 
@@ -488,30 +487,38 @@ class CalificacionController extends Controller
     			$k->id_materia_oferta_gracia = -1;
     		}
 
-			CalificacionBachillerato::where('id_matriculado', $k->id_matriculado)
-			->where('id_oferta_fase', $fase->id)
-			->update(['id_materia_oferta_gracia' => $k->id_materia_oferta_gracia]);
-	
 			if($k->desertado==true){
 				CalificacionBachillerato::where('id_matriculado', $k->id_matriculado)
 				->where('id_oferta_fase', $fase->id)
-				->update(['fecha_registro' => date('Y-m-d h:m:s'),'desertado' => true]);
+				->update(['fecha_registro' => date('Y-m-d h:m:s'),'desertado' => true,'id_materia_oferta_gracia' => $k->id_materia_oferta_gracia]);
+						
 			}else{
 				CalificacionBachillerato::where('id_matriculado', $k->id_matriculado)
 				->where('id_oferta_fase', $fase->id)
-				->update(['fecha_registro' => date('Y-m-d h:m:s'),'desertado' => false]);
+				->update(['fecha_registro' => date('Y-m-d h:m:s'),'desertado' => false,'id_materia_oferta_gracia' => $k->id_materia_oferta_gracia]);
+				
 
 				$no_desertado = Matriculado::find($k->id_matriculado);
 				$no_desertado->razon_desercion = null;
 				$no_desertado->update();
 			}
 
-    		$k->save();
+       		   $k->save();
+                   usleep(5000);
 		}
+
+
+		DB::beginTransaction();
 
 		DB::statement("UPDATE todosabc.calificaciones_bachillerato SET estado = 'D' WHERE desertado = true AND estado IS NULL");
 
+	DB::commit();
+
+
+		DB::beginTransaction();
+
 		DB::statement("DELETE FROM todosabc.calificaciones_bachillerato WHERE id IN (SELECT id FROM (SELECT id, ROW_NUMBER() OVER (partition BY id_usuario, id_matriculado, id_materia_oferta, id_oferta_fase order by id desc) AS rnum FROM todosabc.calificaciones_bachillerato ) t WHERE t.rnum > 1)");
+	DB::commit();
 
 		$this->cargarEstudiantesBachillerato($materia_oferta, $docente->id, $paralelo, $fase);
 		
@@ -603,10 +610,14 @@ class CalificacionController extends Controller
 
     		$k->save();
 		}
-
+		
 		DB::statement("UPDATE todosabc.calificaciones_basica SET estado = 'D' WHERE desertado = true AND estado IS NULL");
+		
+
+  
 
 		DB::statement("DELETE FROM todosabc.calificaciones_basica WHERE id IN (SELECT id FROM (SELECT id, ROW_NUMBER() OVER (partition BY id_usuario, id_matriculado, id_materia_oferta, id_fase order by id desc) AS rnum FROM todosabc.calificaciones_basica ) t WHERE t.rnum > 1)");
+ 
 
 		$this->cargarEstudiantesBasica($materia_oferta, $docente->id, $paralelo);
 
@@ -709,6 +720,8 @@ class CalificacionController extends Controller
     		}
 
     		$k->save();
+	        usleep(1000);
+
 
     		if($k->modulo_estado!='D'){
     			$mat = DB::table('todosabc.matriculados')
@@ -855,6 +868,7 @@ class CalificacionController extends Controller
 				$desertados = CalificacionBachillerato::where('id_matriculado', $estudiante->id)
 				->where('id_oferta_fase', $fase->id)
 				->where('desertado', true)
+				->orderby('id_matriculado','desc')
 				->get();
 
 				if($desertados->count() > 0){
@@ -868,6 +882,7 @@ class CalificacionController extends Controller
 				$gracias = CalificacionBachillerato::where('id_matriculado', $estudiante->id)
 				->where('id_oferta_fase', $fase->id)
 				->where('gracia', '>', 0)
+				->orderby('id_matriculado','desc')
 				->get();
 
 				if($gracias->count() == 0){

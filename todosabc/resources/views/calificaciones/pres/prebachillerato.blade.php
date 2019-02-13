@@ -19,10 +19,11 @@
 		    			<th>NOMBRES</th>
 		    			<th>IDENTIFICACIÓN</th>
 		    			<th>INSTITUCIÓN EDUCATIVA</th>
-		    			<th>PARALELO</th>		    			
-		    			<th><input type="checkbox" name="f1" id="f1" onchange="marcar_todos_fase1(this);" title="marcar todos fase 1"> 1 BGU</th>
-		    			<th><input type="checkbox" name="f2" id="f2" onchange="marcar_todos_fase2(this);" title="marcar todos fase 2"> 2 BGU</th>
-		    			<th><input type="checkbox" name="f3" id="f3" onchange="marcar_todos_fase3(this);" title="marcar todos fase 3"> 3 BGU</th>
+		    			<th>PARALELO</th>
+		    			<th>1 BGU</th>
+		    			<th>2 BGU</th>
+		    			<th>3 BGU</th>		    			
+		    			
 		    		</tr>
 		    	</thead>
 		    	<tbody>						
@@ -34,13 +35,27 @@
 		    				<td>{{ $mat->amie }} - {{ $mat->institucion }}</td>
 		    				<td>{{ $mat->paralelo }}</td>
 		    				<td>
-		    					<input type="checkbox" name="f1-{{$mat->codigo_inscripcion}}" id="f1-{{$mat->codigo_inscripcion}}" onchange="marcar_fase('{{$mat->codigo_inscripcion}}',this);" @if($mat->fase1 == true) checked="checked" @endif>
+		    					@if ($mat->ultimo_anio_aprobado=='10 EGB' or $mat->ultimo_anio_aprobado=='Documento 10mo. EGB')
+
+		    					<input type="checkbox" name="f1-{{$mat->codigo_inscripcion}}" id="f1-{{$mat->codigo_inscripcion}}" checked="checked" >
+		    					@endif
+
 		    					</td>
+
 		    				<td>
-		    					<input type="checkbox" name="f2-{{$mat->codigo_inscripcion}}" id="f2-{{$mat->codigo_inscripcion}}" onchange="marcar_fase('{{$mat->codigo_inscripcion}}',this);" @if($mat->fase2 == true) checked="checked" @endif>	
+		    					@if ($mat->ultimo_anio_aprobado=='10 EGB' or $mat->ultimo_anio_aprobado=='Documento 10mo. EGB' 
+		    					or $mat->ultimo_anio_aprobado=='1 BGU' or $mat->ultimo_anio_aprobado=='Documento 1ro. BGU' )  
+
+		    					<input type="checkbox" name="f2-{{$mat->codigo_inscripcion}}" id="f2-{{$mat->codigo_inscripcion}}"  checked="checked" >	
+		    					@endif
 		    				</td>
 		    				<td>
-		    					<input type="checkbox" name="f3-{{$mat->codigo_inscripcion}}" id="f3-{{$mat->codigo_inscripcion}}" onchange="marcar_fase('{{$mat->codigo_inscripcion}}',this);" @if($mat->fase3 == true) checked="checked" @endif>
+		    					@if ($mat->ultimo_anio_aprobado=='10 EGB' or $mat->ultimo_anio_aprobado=='Documento 10mo. EGB' or $mat->ultimo_anio_aprobado=='1 BGU' or 
+		    					$mat->ultimo_anio_aprobado=='Documento 1ro. BGU' or
+		    					$mat->ultimo_anio_aprobado=='2 BGU' 
+		    					or $mat->ultimo_anio_aprobado=='Documento 2do. BGU' ) 
+		    					<input type="checkbox" name="f3-{{$mat->codigo_inscripcion}}" id="f3-{{$mat->codigo_inscripcion}}"  checked="checked">
+		    					@endif
 		    				</td>
 						</tr>
 		    		@endforeach			    				    	
