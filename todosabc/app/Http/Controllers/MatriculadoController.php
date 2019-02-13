@@ -339,6 +339,8 @@ class MatriculadoController extends Controller
                                                        'nacionalidades' => $this->nacionalidades,
                                                        'rezagos_educativos' => $this->rezagos_educativos,
                                                        'ultimos_anios_aprobados' => $this->ultimos_anios_aprobados,
+                                                      // 'ultimo_anio_aprobado' =>  
+                                                    //   $matriculado->ultimo_anio_aprobado, 
                                                        'ofertas_educativas' => $this->ofertas_educativas,
                                                        'zonas' => $this->zonas,
                                                        'paralelo' => $matriculado->paralelo,
@@ -360,7 +362,13 @@ class MatriculadoController extends Controller
                                                        'nacionalidades' => $this->nacionalidades,
                                                     'rezagos_educativos' => $this->rezagos_educativos,
                                                    'ultimos_anios_aprobados' => $this->ultimos_anios_aprobados,
+<<<<<<< HEAD
                                                     'ofertas_educativas' => $this->ofertas_educativas,
+=======
+                                                      // 'ultimo_anio_aprobado' =>  
+                                                      // $matriculado->ultimo_anio_aprobado, 
+                                                       'ofertas_educativas' => $this->ofertas_educativas,
+>>>>>>> 4fc55a292ae86f437e9c3cb1b0013c216a957fbc
                                                        'zonas' => $this->zonas,
                                                        'paralelo' => $matriculado->paralelo,
                                                        'paralelos' => $paralelos,
@@ -380,6 +388,8 @@ class MatriculadoController extends Controller
                                                       'datos_familiares' => $this->datos_familiares,
                                                       'nacionalidades' => $this->nacionalidades,
                                                       'rezagos_educativos' => $this->rezagos_educativos,
+                                                   //    'ultimo_anio_aprobado' =>  
+                                                     //  $matriculado->ultimo_anio_aprobado, 
                                                       'ultimos_anios_aprobados' => $this->ultimos_anios_aprobados,
                                                       'ofertas_educativas' => $this->ofertas_educativas,
                                                       'zonas' => $this->zonas,
@@ -406,6 +416,7 @@ class MatriculadoController extends Controller
                                                       'datos_familiares' => $this->datos_familiares,
                                                       'nacionalidades' => $this->nacionalidades,
                                                       'rezagos_educativos' => $this->rezagos_educativos,
+                                                   //    'ultimo_anio_aprobado' =>'',
                                                       'ultimos_anios_aprobados' => $this->ultimos_anios_aprobados,
                                                       'ofertas_educativas' => $this->ofertas_educativas,
                                                       'zonas' => $this->zonas,
@@ -429,6 +440,7 @@ class MatriculadoController extends Controller
                                                       'nacionalidades' => $this->nacionalidades,
                                                       'rezagos_educativos' => $this->rezagos_educativos,
                                                       'ultimos_anios_aprobados' => $this->ultimos_anios_aprobados,
+                                                    //  'ultimo_anio_aprobado' =>'',
                                                       'ofertas_educativas' => $this->ofertas_educativas,
                                                       'zonas' => $this->zonas,
                                                       'id_docente' => $this->docentes[0]->id,
@@ -450,6 +462,7 @@ class MatriculadoController extends Controller
                                                       'nacionalidades' => $this->nacionalidades,
                                                       'rezagos_educativos' => $this->rezagos_educativos,
                                                       'ultimos_anios_aprobados' => $this->ultimos_anios_aprobados,
+                                                    //   'ultimo_anio_aprobado' =>'',
                                                       'ofertas_educativas' => $this->ofertas_educativas,
                                                       'zonas' => $this->zonas,
                                                       'paralelo' => '',
@@ -851,7 +864,29 @@ class MatriculadoController extends Controller
                                    'Centro de Rehabilitación Social (CRS)',
                                    'Centro de Adolescentes Infractores (CAI)',
                                   ];
+<<<<<<< HEAD
          }
+=======
+
+       // $this->ultimos_anios_aprobados = [              
+         //                          'Ninguno',
+           //                         '1 EBG',
+             //                       '2 EGB',
+               //                     '3 EGB',
+                 //                   '4 EGB',
+                   //                 '5 EGB',
+                     //               '6 EGB',
+                       //             '7 EGB',
+                         //           '8 EGB',
+                           //         '9 EGB',
+                             //       '10 EGB',
+                               //     '1 BGU',
+                                 //   '2 BGU',
+                                   // '3 BGU - PRUEBA',
+                                  //];
+
+          }
+>>>>>>> 4fc55a292ae86f437e9c3cb1b0013c216a957fbc
 
     private function cargarEstudiantes(){
       if(session('user')->id_oferta==6 || session('user')->id_oferta==7 || session('user')->id_oferta==13 || session('user')->id_oferta==14  || session('user')->id_oferta==20 || session('user')->id_oferta==21){
