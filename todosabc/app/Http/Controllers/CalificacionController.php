@@ -517,8 +517,7 @@ class CalificacionController extends Controller
 
 		}
 
-	//	for ($i=0;$i<=5;$i++)
-	//	{
+
 		DB::beginTransaction();
 		DB::statement("UPDATE todosabc.calificaciones_bachillerato SET estado = 'D' WHERE desertado = true AND estado IS NULL");
 		DB::commit();
