@@ -12,11 +12,13 @@ class InstitucionController extends Controller
 	private $amies;
     private $cpls;
     private $cpl;
+    private $nombre;
 
     public function index()
     {
         $this->obtenerInstitucionesDelUsuario();
         $this->cargarAmiesUsuario();
+
     	return view('menus.instituciones', ['ies' => $this->ies,
     		                                'amies' => $this->amies,
     	                                   ]);
@@ -34,14 +36,23 @@ class InstitucionController extends Controller
     }
 
 
-  private function cargarCpl(){
-        $this->cpls = DB::table('todosabc.cpl')
-        ->select('nombre')
-        ->orderBy('nombre')
-        ->get();
+  private function seleccionaarCpl(Request $request ,$id) {
+    $ie = Institucion::find($id);
+
+    $cpl=DB::table('todosabc.cpl')
+       ->orderBy('nombre','asc')
+       ->list('name')
+       ->where('distro', $ie->cpl)
+        ->where('zona', session('user')->zona)
+        ->first();
+
+    return view('instituciones.nueva', compact('ie','cpl')
+        //  ['nombre' => $cpl]);
+
     }
 
-   $this->cpl = $this->cargarCpl();
+
+
 
 
 

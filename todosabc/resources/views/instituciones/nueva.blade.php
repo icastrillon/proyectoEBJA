@@ -57,22 +57,32 @@
 
 				<div class="form-horizontal">
 					<div class="form-group">
-						<label class="col-sm-4 control-label" for="cpl "> CPL</label>
-						<div class="col-sm-3">
-							<select class="form-control" id="CPL" name="CPL"
-							value="{{ $cpl->nombre }}">
-								<option value="-1">--Seleccionar--</option>
-								@foreach ($nombre as $val)
-								<option value="{{ $val->nombre }}"
-									@if ($val->nombre == $cpl->nombre)
-									selected="selected"
-									@endif
-									>{{ $val->nombre }}</option>
-								@endforeach
-							</select>
-						</div>
+					    <label for="frm-buscar" class="col-sm-3 control-label">CPL</label>
+					    <div class="col-sm-2">
+			    			<form id="frm-lista" action="{{ route('seleccionaarCpl') }}" method="POST">
+			    			{{ csrf_field() }}
+			    				<input class="form-control" type="text" name="cod_amie" value="" onkeyup="this.value = this.value.toUpperCase();" maxlength="10">
+			    				<input type="hidden" name="accion" value="nue_ie">
+			            	</form>
+
+			            </div>
+
+
+					     <div class="col-sm-1">
+							<a href="{{ route('seleccionaarCpl') }}" class="btn btn-success"
+			                    onclick="event.preventDefault(); document.getElementById('frm-buscar').submit();">
+			                    Buscar
+			                </a>
+		            	</div>
+
+
 					</div>
 				</div>
+
+
+
+
+
 
 				<form id="frm-guardar" action="{{ route('guardarIE') }}" method="POST">
                     {{ csrf_field() }}
