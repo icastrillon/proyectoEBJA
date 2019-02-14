@@ -35,28 +35,52 @@
 				<div class="form-horizontal">
 					<div class="form-group">
 					    <label for="frm-buscar" class="col-sm-3 control-label">AMIE</label>
-					    <div class="col-sm-2">			    	
+					    <div class="col-sm-2">
 			    			<form id="frm-buscar" action="{{ route('buscarAmie') }}" method="POST">
 			    			{{ csrf_field() }}
 			    				<input class="form-control" type="text" name="cod_amie" value="" onkeyup="this.value = this.value.toUpperCase();" maxlength="10">
-			    				<input type="hidden" name="accion" value="nue_ie">				    		
-			            	</form>	
+			    				<input type="hidden" name="accion" value="nue_ie">
+			            	</form>
 			            </div>
-			            <div class="col-sm-1">
-							<a href="{{ route('buscarAmie') }}" class="btn btn-success" 
+
+						 <div class="col-sm-1">
+							<a href="{{ route('buscarAmie') }}" class="btn btn-success"
 			                    onclick="event.preventDefault(); document.getElementById('frm-buscar').submit();">
 			                    Buscar
 			                </a>
-		            	</div>										    
+		            	</div>
 					</div>
 				</div>
-				<form id="frm-guardar" action="{{ route('guardarIE') }}" method="POST">                    
+
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-4 control-label" for="cpl">CPL</label>
+						<div class="col-sm-5">
+							<select class="form-control" id="cpl" name="cpl" value="{{ $cpl->nombre }}">
+								<option value="-1">--Seleccionar--</option>
+								@foreach ($cpl as $val)
+								<option value="{{ $val->nombre }}"
+									@if ($val->nombre == $inscrito->nombre)
+									selected="selected"
+									@endif
+									>{{ $val->nombre }}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+				<form id="frm-guardar" action="{{ route('guardarIE') }}" method="POST">
                     {{ csrf_field() }}
 					<div class="form-horizontal">
 						<div class="form-group">
 						    <label for="lblFecha" class="col-sm-3 control-label">FECHA REGISTRO</label>
 						    <div class="col-sm-3">
-						      <span class="form-control" id="lblFecha">{{ $ie->fecha_registro }}</span>						      
+						      <span class="form-control" id="lblFecha">{{ $ie->fecha_registro }}</span>
 						    </div>
 						</div>
 					</div>
@@ -64,17 +88,17 @@
 				</form>
 			</div>
 			<div class="panel-footer">
-				<a href="{{ route('guardarIE') }}" class="btn btn-primary btn-sm" 
-					@if (isset($amie) and session('estadoIE')===301) 
-					
+				<a href="{{ route('guardarIE') }}" class="btn btn-primary btn-sm"
+					@if (isset($amie) and session('estadoIE')===301)
+
 					@else
 						disabled="disabled"
-					@endif 
+					@endif
                     onclick="event.preventDefault(); document.getElementById('frm-guardar').submit();">
                     Guardar Institución
                 </a>
                 <a href="{{ url('/instituciones') }}" class="btn btn-default btn-sm">Cancelar</a>
-			</div>					
+			</div>
 		</div>
 	</div>
 @endsection

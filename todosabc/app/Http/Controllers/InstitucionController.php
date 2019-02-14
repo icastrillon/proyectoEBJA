@@ -10,6 +10,7 @@ class InstitucionController extends Controller
 {
 	private $ies;
 	private $amies;
+    private $cpl;
 
     public function index()
     {
@@ -30,6 +31,10 @@ class InstitucionController extends Controller
 
         return view('instituciones.eliminar', ['ie' => $ie, 'institucion' => $amie->institucion]);
     }
+
+    public function listarcp(Request $request,$)
+
+
 
     public function eliminar(Request $request){
         $ie = Institucion::find($request->input('id'));
@@ -60,47 +65,6 @@ class InstitucionController extends Controller
     {
         $opcion = $request->input('accion');
         $codigo_amie = $request->input('cod_amie');
-        $codigo_amie_cpl=$request->input('cod_amie');
-
-        if(session('user')->id=22 ){
-            if($codigo_amie){
-            $amie = DB::table('codigos_amie')
-            ->where('amie', '04H00020')
-            ->where('zona', session('user')->zona);
-
-            if($amie){
-                if($opcion=='nue_ie'){
-                    $msgIE = '';
-                    $request->session()->put('estadoIE', 301);
-                    $request->session()->put('msgIE', $msgIE);
-                    $ie = new Institucion;
-                    $ie->id_usuario = session('user')->id;
-                    $ie->fecha_registro = date('d-m-Y h:i:s');
-                    $ie->amie = $amie->amie;
-                    return view('instituciones.nueva', ['ie' => $ie, 'amie' => $amie]);
-                }else{
-                    $msgIE = '';
-                    $request->session()->put('estadoIE', 301);
-                    $request->session()->put('msgIE', $msgIE);
-                    $ie = Institucion::find($request->input('id_institucion'));
-                    $ie->amie = $amie->amie;
-                    return view('instituciones.modificar', ['ie' => $ie, 'amie' => $amie]);
-                }
-            }
-            else{
-                $msgIE = 'Debe ingresar un código AMIE válido';
-                $request->session()->put('estadoIE', 500);
-                $request->session()->put('msgIE', $msgIE);
-                if($opcion=='nue_ie'){
-                    return redirect()->route('nuevaIE');
-                }else{
-                    return redirect('instituciones/id/'.$request->input('id_institucion'));
-                }
-            }
-        }
-    }
-
-
 
         if($codigo_amie){
             $amie = DB::table('codigos_amie')
@@ -187,6 +151,7 @@ class InstitucionController extends Controller
                     $ie_existente = $ie;
                     $encontrado = true;
                     break;
+
                 }
             }
 
