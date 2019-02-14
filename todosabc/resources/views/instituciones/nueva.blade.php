@@ -57,8 +57,19 @@
 
 				<div class="form-horizontal">
 					<div class="form-group">
-						<label class="col-sm-4 control-label" for="estado_civil"> CPL</label>
-						<div class="col-sm-5">
+						<label class="col-sm-4 control-label" for="cpl "> CPL</label>
+						<div class="col-sm-3">
+							<select class="form-control" id="CPL" name="CPL"
+							value="{{ $cpl->nombre }}">
+								<option value="-1">--Seleccionar--</option>
+								@foreach ($nombre as $val)
+								<option value="{{ $val->nombre }}"
+									@if ($val->nombre == $cpl->nombre)
+									selected="selected"
+									@endif
+									>{{ $val->nombre }}</option>
+								@endforeach
+							</select>
 						</div>
 					</div>
 				</div>

@@ -11,6 +11,7 @@ class InstitucionController extends Controller
 	private $ies;
 	private $amies;
     private $cpls;
+    private $cpl;
 
     public function index()
     {
@@ -32,21 +33,22 @@ class InstitucionController extends Controller
         return view('instituciones.eliminar', ['ie' => $ie, 'institucion' => $amie->institucion]);
     }
 
-public function seleccionarCpl (Request $request, $id){
-     $this->cargarCombos();
-     if (session('user')->id_oferta==24){
-    return view('instituciones.nueva',
-        ['nombre' => $this->cpls]);
-    }
-
-
-}
-
-
-
 
   private function cargarCpl(){
+        $this->cpls = DB::table('todosabc.cpl')
+        ->select('nombre')
+        ->orderBy('nombre')
+        ->get();
+    }
+
+   $this->cpl = $this->cargarCpl();
+
+
+
+
+      private function cpl(){
         $this->cpl = DB::table('todosabc.cpl')
+        ->select('nombre')
         ->orderBy('nombre')
         ->get();
     }
