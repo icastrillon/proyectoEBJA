@@ -43,36 +43,25 @@
 			            	</form>
 			            </div>
 
-						 <div class="col-sm-1">
+
+					     <div class="col-sm-1">
 							<a href="{{ route('buscarAmie') }}" class="btn btn-success"
 			                    onclick="event.preventDefault(); document.getElementById('frm-buscar').submit();">
 			                    Buscar
 			                </a>
 		            	</div>
+
+
 					</div>
 				</div>
 
 				<div class="form-horizontal">
 					<div class="form-group">
-						<label class="col-sm-4 control-label" for="cpl">CPL</label>
+						<label class="col-sm-4 control-label" for="estado_civil"> CPL</label>
 						<div class="col-sm-5">
-							<select class="form-control" id="cpl" name="cpl" value="{{ $cpl->nombre }}">
-								<option value="-1">--Seleccionar--</option>
-								@foreach ($cpl as $val)
-								<option value="{{ $val->nombre }}"
-									@if ($val->nombre == $inscrito->nombre)
-									selected="selected"
-									@endif
-									>{{ $val->nombre }}</option>
-								@endforeach
-							</select>
 						</div>
 					</div>
 				</div>
-
-
-
-
 
 				<form id="frm-guardar" action="{{ route('guardarIE') }}" method="POST">
                     {{ csrf_field() }}
@@ -87,6 +76,8 @@
 					<input type="hidden" name="selectAmie" value="{{ $ie->amie }}">
 				</form>
 			</div>
+
+
 			<div class="panel-footer">
 				<a href="{{ route('guardarIE') }}" class="btn btn-primary btn-sm"
 					@if (isset($amie) and session('estadoIE')===301)

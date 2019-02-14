@@ -31,6 +31,7 @@ Route::get('/instituciones', 'InstitucionController@index')->name('instituciones
 Route::get('instituciones/nueva', 'InstitucionController@nueva')->name('nuevaIE');
 Route::get('instituciones/id/{id}', 'InstitucionController@seleccionar');
 Route::get('instituciones/seleccionar/{id}', 'InstitucionController@seleccionarIE');
+Route::get('instituciones/cpl', 'InstitucionController@seleccionarCpl')->name('seleccionaarCpl');
 Route::post('instituciones/modificar', 'InstitucionController@modificar')->name('modificarIE');
 Route::post('instituciones/guardar', 'InstitucionController@guardar')->name('guardarIE');
 Route::post('instituciones/limpiar', 'InstitucionController@limpiar')->name('limpiarMsgIE');

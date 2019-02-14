@@ -10,7 +10,7 @@ class InstitucionController extends Controller
 {
 	private $ies;
 	private $amies;
-    private $cpl;
+    private $cpls;
 
     public function index()
     {
@@ -32,7 +32,25 @@ class InstitucionController extends Controller
         return view('instituciones.eliminar', ['ie' => $ie, 'institucion' => $amie->institucion]);
     }
 
-    public function listarcp(Request $request,$)
+public function seleccionarCpl (Request $request, $id){
+     $this->cargarCombos();
+     if (session('user')->id_oferta==24){
+    return view('instituciones.nueva',
+        ['nombre' => $this->cpls]);
+    }
+
+
+}
+
+
+
+
+  private function cargarCpl(){
+        $this->cpl = DB::table('todosabc.cpl')
+        ->orderBy('nombre')
+        ->get();
+    }
+
 
 
 
