@@ -55,26 +55,17 @@
 
 				<div class="form-horizontal">
 					<div class="form-group">
-					    <label for="frm-buscar" class="col-sm-3 control-label">CPL</label>
-
-							<div class="form-group">
-
-							</div>
-					</div>
-				</div>
-				<form id="frm-guardar" action="{{ route('guardarIE') }}" method="POST">
-                    {{ csrf_field() }}
-					<div class="form-horizontal">
-						<div class="form-group">
-						    <label for="lblFecha" class="col-sm-3 control-label">FECHA REGISTRO</label>
-						    <div class="col-sm-3">
-						      <span class="form-control" id="lblFecha">{{ $ie->fecha_registro }}</span>
-						    </div>
+						<label class="col-sm-4 control-label" for="cpl">CPL</label>
+						<div class="col-sm-5">
+							<select class="form-control" id="cpl" name="cpl" value="{{ $cpl->nombre }}">
+								<option value="-1">--Seleccionar--</option>
+								@foreach ($cpl as $val)
+								<option value="{{ $val->nombre }}"</option>
+								@endforeach
+							</select>
 						</div>
 					</div>
-					<input type="hidden" name="selectAmie" value="{{ $ie->amie }}">
-				</form>
-			</div>
+				</div>
 
 
 			<div class="panel-footer">

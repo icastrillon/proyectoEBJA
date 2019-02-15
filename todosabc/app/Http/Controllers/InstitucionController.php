@@ -11,7 +11,7 @@ class InstitucionController extends Controller
 {
 	private $ies;
 	private $amies;
-    private $cpls;
+    private $cpl;
 
     public function index()
     {
@@ -36,9 +36,15 @@ class InstitucionController extends Controller
     }
 
   private function cargarListsCpl(){
-   $cpls = DB::table('todosabc.cpl')
-    ->get();
- }
+    $cpl = DB::table('todosabc.cpl')
+       ->groupBy('nombre')
+       ->select('nombre')
+      ->orderBy('nombre')
+       ->get();
+
+       $this->cpl=$cpl;
+
+}
 
 
 
