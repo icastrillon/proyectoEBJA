@@ -5,19 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Modelo\Institucion;
+use App\Modelo\Cpl;
 
 class InstitucionController extends Controller
 {
 	private $ies;
 	private $amies;
     private $cpls;
-    private $cpl;
-    private $nombre;
 
     public function index()
     {
         $this->obtenerInstitucionesDelUsuario();
         $this->cargarAmiesUsuario();
+        $this->cargarListsCpl();
 
     	return view('menus.instituciones', ['ies' => $this->ies,
     		                                'amies' => $this->amies,
@@ -35,35 +35,19 @@ class InstitucionController extends Controller
         return view('instituciones.eliminar', ['ie' => $ie, 'institucion' => $amie->institucion]);
     }
 
-
-  private function seleccionaarCpl(Request $request ,$id) {
-    $ie = Institucion::find($id);
-
-    $cpl=DB::table('todosabc.cpl')
-       ->orderBy('nombre','asc')
-       ->list('name')
-       ->where('distro', $ie->cpl)
-        ->where('zona', session('user')->zona)
-        ->first();
-
-    return view('instituciones.nueva', compact('ie','cpl')
-        //  ['nombre' => $cpl]);
-
-    }
+  private function cargarListsCpl(){
+   $cpls = DB::table('todosabc.cpl')
+    ->get();
+ }
 
 
 
 
+  public function listaCpl(Request $request) {
 
-
-
-      private function cpl(){
-        $this->cpl = DB::table('todosabc.cpl')
-        ->select('nombre')
-        ->orderBy('nombre')
-        ->get();
-    }
-
+    $cpls=Cpl::all();
+ return view('instituciones.nuevo', compact('cpls'));
+  }
 
 
 
