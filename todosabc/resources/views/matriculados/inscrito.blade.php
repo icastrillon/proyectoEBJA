@@ -410,7 +410,7 @@
 		</div>
 		<div class="panel-footer">
 			<div>
-				<a href="{1703017846{ route('matricularInscrito') }}" class="btn btn-success btn-sm"
+				<a href="{{ route('matricularInscrito') }}" class="btn btn-success btn-sm"
                     onclick="event.preventDefault(); document.getElementById('frm-matricular').submit();">
                     Matricular
                 </a>

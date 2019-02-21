@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="container">
+<div class="container">
 	@if (session('estadoIE')==500)
 	<div class="alert alert-danger alert-dismissible" role="alert">
 		{{ session('msgIE') }}
@@ -31,8 +31,53 @@
 					    </div>
 					</div>
 				</div>
-				@endif
+			@if(session('user')->id_oferta==23  or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26 )
 				<div class="form-horizontal">
+					<div class="form-group">
+				<form id="frm-guardar" action="{{ route('guardarIE') }}" method="POST">
+				{{ csrf_field() }}
+						<label class="col-sm-3 control-label" id="cpl">CPL </label>
+							<div class="col-sm-2">
+				              <select name="id_cpl" id="id_cpl" class="form-control">
+				              <option value="-1">--Seleccionar--</option>
+				                @foreach($cpls as $cpl)
+				                <option value="{{$cpl->id }}">{{$cpl->id}}-{{$cpl->nombre}}</option>
+				              @endforeach
+				            </select>
+				       </div>
+				       <div class="form-horizontal">
+						<div class="form-group">
+						    <label for="lblFecha" class="col-sm-3 control-label">FECHA REGISTRO</label>
+						    <div class="col-sm-3">
+						      <span class="form-control" id="lblFecha">{{ $ie->fecha_registro }}</span>
+						    </div>
+						</div>
+					</div>
+					<input type="hidden" name="selectAmie" value="{{ $ie->amie }}">
+				</form>
+				</div>
+				</div>
+			@else
+			<div class="form-horizontal">
+				<div class="form-group">
+				<form id="frm-guardar" action="{{ route('guardarIE') }}" method="POST">
+				{{ csrf_field() }}
+					 <div class="form-horizontal">
+						<div class="form-group">
+						    <label for="lblFecha" class="col-sm-3 control-label">FECHA REGISTRO</label>
+						    <div class="col-sm-3">
+						      <span class="form-control" id="lblFecha">{{ $ie->fecha_registro }}</span>
+						    </div>
+						</div>
+					</div>
+					<input type="hidden" name="selectAmie" value="{{ $ie->amie }}">
+				</form>
+					</div>
+				</div>
+		@endif
+	@endif
+
+		<div class="form-horizontal">
 					<div class="form-group">
 					    <label for="frm-buscar" class="col-sm-3 control-label">AMIE</label>
 					    <div class="col-sm-2">
@@ -42,8 +87,6 @@
 			    				<input type="hidden" name="accion" value="nue_ie">
 			            	</form>
 			            </div>
-
-
 					     <div class="col-sm-1">
 							<a href="{{ route('buscarAmie') }}" class="btn btn-success"
 			                    onclick="event.preventDefault(); document.getElementById('frm-buscar').submit();">
@@ -51,35 +94,15 @@
 			                </a>
 		            	</div>
 					</div>
-				</div>
-
-				<div class="form-horizontal">
-					<div class="form-group">
-						<label class="col-sm-4 control-label" for="cpl">CPL</label>
-						<div class="col-sm-5">
-							<select class="form-control" id="cpl" name="cpl" value="{{ $cpl->nombre }}">
-								<option value="-1">--Seleccionar--</option>
-								@foreach ($cpl as $val)
-								<option value="{{ $val->nombre }}"</option>
-								@endforeach
-							</select>
-						</div>
-					</div>
-				</div>
-
-
-			<div class="panel-footer">
+			</div>
+	</div>
+		<div class="panel-footer">
 				<a href="{{ route('guardarIE') }}" class="btn btn-primary btn-sm"
-					@if (isset($amie) and session('estadoIE')===301)
-
-					@else
-						disabled="disabled"
-					@endif
-                    onclick="event.preventDefault(); document.getElementById('frm-guardar').submit();">
+				 onclick="event.preventDefault(); document.getElementById('frm-guardar').submit();">
                     Guardar Institución
                 </a>
                 <a href="{{ url('/instituciones') }}" class="btn btn-default btn-sm">Cancelar</a>
-			</div>
 		</div>
 	</div>
+</div>
 @endsection

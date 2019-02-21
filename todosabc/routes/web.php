@@ -37,6 +37,7 @@ Route::post('instituciones/limpiar', 'InstitucionController@limpiar')->name('lim
 Route::post('instituciones/buscar', 'InstitucionController@buscar')->name('buscarAmie');
 Route::post('instituciones/eliminar', 'InstitucionController@eliminar')->name('eliminarIE');
 
+
 /*
 |--------------------------------------------------------------------------
 | Routes de Docentes

@@ -66,7 +66,9 @@
 						    <label for="institucion" class="col-sm-3 control-label">INSTITUCIÓN</label>
 						    <select class="form-control" name="id_institucion" value="{{ $ie->id }}" style="width: 450px; font-size: 10px;">
 					    		@foreach($ies as $i)
-					    		<option @if($ie->id == $i->id) selected="selected" @endif value="{{ $i->id }}">{{ $ie->zona }} - {{ $ie->amie }} - {{ $ie->institucion }}</option>
+					    		<option @if($ie->id == $i->id)
+					    			selected="selected"
+					    			@endif value="{{ $i->id }}">{{ $ie->zona }} - {{ $ie->amie }} - {{ $ie->institucion }}</option>
 					    		@endforeach
 					    	</select>
 						</div>

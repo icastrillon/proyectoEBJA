@@ -18,7 +18,7 @@
 					<div class="form-group">
 					    <label for="lblZona" class="col-sm-3 control-label">ZONA</label>
 					    <div class="col-sm-3">
-					      <span class="form-control" id="lblZona">{{ session('user')->zona }}</span>					      
+					      <span class="form-control" id="lblZona">{{ session('user')->zona }}</span>
 					    </div>
 					</div>
 				</div>
@@ -33,38 +33,64 @@
 				<div class="form-horizontal">
 					<div class="form-group">
 					    <label for="frm-buscar" class="col-sm-3 control-label">AMIE</label>
-					    <div class="col-sm-2">			    	
+					    <div class="col-sm-2">
 			    			<form id="frm-buscar" action="{{ route('buscarAmie') }}" method="POST">
 			    			{{ csrf_field() }}
 			    				<input class="form-control" type="text" name="cod_amie" value="" onkeyup="this.value = this.value.toUpperCase();" maxlength="10">
 			    				<input type="hidden" name="accion" value="mod_ie">
-			    				<input type="hidden" name="id_institucion" value="{{ $ie->id }}">		    		
-			            	</form>	
+			    				<input type="hidden" name="id_institucion" value="{{ $ie->id }}">
+			            	</form>
 			            </div>
 			            <div class="col-sm-1">
-							<a href="{{ route('buscarAmie') }}" class="btn btn-success" 
+							<a href="{{ route('buscarAmie') }}" class="btn btn-success"
 			                    onclick="event.preventDefault(); document.getElementById('frm-buscar').submit();">
 			                    Buscar
 			                </a>
-		            	</div>										    
+		            	</div>
 					</div>
 				</div>
 			</div>
+	@if(session('user')->id_oferta==23  or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26 )
+			<form id="frm-guardar" action="{{ route('modificarIE') }}" method="POST">
+				{{ csrf_field() }}
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-3 control-label" id="cpl">CPL </label>
+							<div class="col-sm-2">
+								<select class="form-control" id="id_cpl" name="id_cpl" value="{{ $cpl_id }}">
+								<option value="-1">--Seleccionar--</option>
+								@foreach ($cpls as $cpl)
+								<option class="form-control" style="font-size:10px;" value="{{ $cpl->id }}"
+								@if ($cpl->id==$cpl_id)
+									selected="selected"
+								@endif
+								>{{$cpl->id}}-{{$cpl->nombre}}</option>
+								@endforeach
+							</select>
+
+				       </div>
+				   </div>
+				</div>
+			</form>
+		@endif
+
+
 			<div class="panel-footer">
 				<div>
-					<a href="{{ route('modificarIE') }}" class="btn btn-primary btn-sm" 
+					<a href="{{ route('modificarIE') }}" class="btn btn-primary btn-sm"
                         onclick="event.preventDefault(); document.getElementById('frm-modificar').submit();">
                         Guardar cambios
                     </a>
                     <a href="{{ route('institucionesUsuario') }}" class="btn btn-default btn-sm">Cancelar</a>
 
-                    <form id="frm-modificar" action="{{ route('modificarIE') }}" method="POST">                    
+                    <form id="frm-modificar" action="{{ route('modificarIE') }}" method="POST">
                     {{ csrf_field() }}
                     	<input type="hidden" name="id_institucion" value="{{ $ie->id }}">
                     	<input type="hidden" name="amie" value="{{ $ie->amie }}">
+                        <input type="hidden" name="id_cpl" value="{{ $ie->id_cpl }}">
                 	</form>
 				</div>
-			</div>					
+			</div>
 		</div>
 	</div>
 @endsection
