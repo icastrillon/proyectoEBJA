@@ -51,7 +51,7 @@
 			    				<td>{{ $ie->amie }}</td>
 			    				<td>{{ $amies[$ie->amie]->institucion }}</td>
 								<td>{{ $ie->fecha_registro }}</td>
-								<td>{{ $cpls[0]->nombre}}</td>
+								<td>{{ $ie->nombre_cpl}}</td>
 								<td>
 									<a href="{{ url('instituciones/id/'.$ie->id) }}" class="btn btn-link btn-xs">Modificar</a>
 									<a href="{{ url('instituciones/seleccionar/'.$ie->id) }}" class="btn btn-link btn-xs">Eliminar</a>

@@ -17,6 +17,7 @@ class InstitucionController extends Controller
         $this-> obtenerCplDelUsario();
 
 
+
         return view('menus.instituciones', ['ies' => $this->ies,
                                             'amies' => $this->amies,
                                             'cpls'=>$this->cpls,
@@ -77,6 +78,7 @@ class InstitucionController extends Controller
                     ->orderby('todosabc.cpl.nombre')
                      ->get();
 
+
                     if(session('user')->id_oferta==23 or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26)
                     {
                         return view('instituciones.nueva', ['ie' => $ie, 'amie' => $amie,'cpls' =>$cpls]);
@@ -91,19 +93,14 @@ class InstitucionController extends Controller
                     $request->session()->put('msgIE', $msgIE);
                     $ie = Institucion::find($request->input('id_institucion'));
                     $ie->amie = $amie->amie;
-                    $cpls = DB::table('todosabc.cpl')
-                    ->join('codigos_amie','todosabc.cpl.zona','=','codigos_amie.zona')
-                     ->where('todosabc.cpl.zona', session('user')->zona)
-                     ->select('todosabc.cpl.id','todosabc.cpl.nombre')
-                    ->groupby('todosabc.cpl.id','todosabc.cpl.nombre')
-                    ->orderby('todosabc.cpl.nombre')
+                    $cpls=DB::table('todosabc.cpl')
+                    ->select('todosabc.cpl.id','todosabc.cpl.nombre')
+                    ->where('id',$ie->id_cpl)
                     ->get();
-
-                        $cpl = Institucion::find($request->input('id_institucion'));
 
                     if(session('user')->id_oferta==23 or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26)
                     {
-                        return view('instituciones.modificar', ['ie' => $ie, 'amie' => $amie,'cpls'=>$cpls,'cpl_id'=>$cpl->id_cpl]);
+                        return view('instituciones.modificar', ['ie' => $ie, 'amie' => $amie,'cpls'=>$cpls]);
                     }
                     else {
                     return view('instituciones.modificar', ['ie' => $ie, 'amie' => $amie]);
@@ -147,21 +144,24 @@ class InstitucionController extends Controller
         ->where('amie', $ie->amie)
         ->first();
 
-        $cpls = DB::table('todosabc.cpl')
-           ->join('codigos_amie','todosabc.cpl.zona','=','codigos_amie.zona')
-            ->where('todosabc.cpl.zona', session('user')->zona)
-            ->select('todosabc.cpl.id','todosabc.cpl.nombre')
-            ->groupby('todosabc.cpl.id','todosabc.cpl.nombre')
-            ->orderby('todosabc.cpl.nombre')
-            ->get();
+
+                //$cpls = DB::table('todosabc.instituciones')
+               // ->join('todosabc.cpl','todosabc.instituciones.id_cpl','=','todosabc.cpl.id')
+               // ->select('todosabc.cpl.id','todosabc.cpl.nombre')
+                //->get();
+
+                        $cpls=DB::table('todosabc.cpl')
+                    ->select('todosabc.cpl.id','todosabc.cpl.nombre')
+                    ->where('id',$ie->id_cpl)
+                    ->get();
+
 
                 if(session('user')->id_oferta==23 or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26)
                 {
                   return view('instituciones.modificar', ['ie' => $ie,
                                                         'amie' => $amie,
                                                         'amies' => $this->amies,
-                                                          'cpls'=>$cpls,
-                                                        'cpl_id'=>$ie->id_cpl
+                                                        'cpls'=>$cpls,
                                                        ]);
               }
                 else {
@@ -196,18 +196,22 @@ class InstitucionController extends Controller
                 $msgIE = 'La Institución Educativa '.$ie_existente->amie.' ya se encuentra registrada';
                 $request->session()->put('estadoIE', 600);
                 $request->session()->put('msgIE', $msgIE);
-                $cpls = DB::table('todosabc.instituciones')
-                    ->join('todosabc.cpl','todosabc.instituciones.id_cpl','=','todosabc.cpl.id')
-                    ->select('todosabc.cpl.id','todosabc.cpl.nombre')
-                     ->get();
 
+                //$cpls = DB::table('todosabc.instituciones')
+               // ->join('todosabc.cpl','todosabc.instituciones.id_cpl','=','todosabc.cpl.id')
+               // ->select('todosabc.cpl.id','todosabc.cpl.nombre')
+                //->get();
 
-                  $cpl = Institucion::find($request->input('id_institucion'));
+           $cpls=DB::table('todosabc.cpl')
+                  ->select('todosabc.cpl.id','todosabc.cpl.nombre')
+                  ->where('id',$request->input('id_cpl'))
+                 ->get();
+
 
                 if(session('user')->id_oferta==23 or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26){
 
 
-                return view('instituciones.modificar', ['ie' => $ie_existente, 'amie' => $amie,'cpls'=>$cpls,'cpl_id'=>$cpl->id_cpl]);
+                return view('instituciones.modificar', ['ie' => $ie_existente, 'amie' => $amie,'cpls'=>$cpls]);
 
                 }
                 else{
@@ -219,11 +223,19 @@ class InstitucionController extends Controller
 
         if(session('user')->id_oferta==23 or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26)
         {
+
+        $cpl_existe=DB::table('todosabc.cpl')
+                ->select('todosabc.cpl.nombre')
+                ->where('id',$request->input('id_cpl'))
+                ->get();
+
         $institucion = Institucion::find($request->input('id_institucion'));
         $institucion->amie = $request->input('amie');
         $institucion->id_cpl=$request->input('id_cpl');
+        $institucion->nombre_cpl=$cpl_existe[0]->nombre;
         $institucion->update();
-        $msgIE = "Los datos de la Institución educativa fueron actualizados exitosamente prueba " .$institucion->id_cpl;
+
+        $msgIE = "Los datos de la Institución educativa fueron actualizados exitosamente";
         $request->session()->put('estadoIE', 200);
         $request->session()->put('msgIE', $msgIE);
 
@@ -266,11 +278,18 @@ class InstitucionController extends Controller
                 return view('instituciones.nueva', ['ie' => $ie_existente, 'amie' => $amie]);
             }
         }
+
+        $cpl_existe=DB::table('todosabc.cpl')
+        ->select('todosabc.cpl.nombre')
+        ->where('id',$request->input('id_cpl'))
+        ->get();
+
         $ie = new Institucion;
         $ie->id_usuario = session('user')->id;
         $ie->amie = $request->input('selectAmie');
         $ie->fecha_registro = date('d-m-Y h:i:s');
         $ie->id_cpl= $request->input('id_cpl');
+        $ie->nombre_cpl=$cpl_existe[0]->nombre;
         $ie->save();
         $msgIE = "Institución educativa ".$ie->amie." registrada exitosamente ";
         $request->session()->put('estadoIE', 200);
@@ -311,6 +330,24 @@ class InstitucionController extends Controller
 
     }
 
+
+ private function cargarCplUsuario()
+    {
+        $cpls = DB::table('todosabc.instituciones')
+                    ->join('todosabc.cpl','todosabc.cpl.id','=','todosabc.instituciones.id_cpl')
+                    ->where('todosabc.cpl.zona', session('user')->zona)
+                    ->select('todosabc.cpl.nombre')
+                    ->groupby('todosabc.cpl.id','todosabc.cpl.nombre')
+                    ->orderby('todosabc.cpl.nombre')
+                     ->get();
+         if($cpls){
+            foreach ($cpls as $key => $value) {
+                $cpls[$value->nombre] = $cpls[$key];
+                unset($key);
+            }
+            $this->cpls = $cpls;
+        }
+    }
 
 
 

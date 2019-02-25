@@ -13,9 +13,15 @@
 		@endif
 		<div class="panel panel-primary">
 			<div class="panel-heading">Paso 1: Instituciones > Institución Seleccionada</div>
+
 			<div class="panel-body">
+
 				<div class="form-horizontal">
 					<div class="form-group">
+						 <div class="alert alert-info alert-dismissible" role="alert">
+			<p style="font-weight: bold;">RECOMENDACIÓN:</p>
+			<p style="text-align: justify;"><em>Verifique que el CPl corresponda con la institución, si no corresponde eliminar la institución y volver a registrar.<span style="color: red;">Verificar antes de relacionar docente y  matriculados.</span></p>
+		</div>
 					    <label for="lblZona" class="col-sm-3 control-label">ZONA</label>
 					    <div class="col-sm-3">
 					      <span class="form-control" id="lblZona">{{ session('user')->zona }}</span>
@@ -57,19 +63,19 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label" id="cpl">CPL </label>
 							<div class="col-sm-2">
-								<select class="form-control" id="id_cpl" name="id_cpl" value="{{ $cpl_id }}">
+								<select class="form-control" id="id_cpl" name="id_cpl" value="{{ $ie->id_cpl}}">
 								<option value="-1">--Seleccionar--</option>
 								@foreach ($cpls as $cpl)
 								<option class="form-control" style="font-size:10px;" value="{{ $cpl->id }}"
-								@if ($cpl->id==$cpl_id)
+								@if ($cpl->id==$ie->id_cpl)
 									selected="selected"
 								@endif
 								>{{$cpl->id}}-{{$cpl->nombre}}</option>
 								@endforeach
 							</select>
-
-				       </div>
+						</div>
 				   </div>
+
 				</div>
 			</form>
 		@endif
@@ -88,6 +94,7 @@
                     	<input type="hidden" name="id_institucion" value="{{ $ie->id }}">
                     	<input type="hidden" name="amie" value="{{ $ie->amie }}">
                         <input type="hidden" name="id_cpl" value="{{ $ie->id_cpl }}">
+
                 	</form>
 				</div>
 			</div>
