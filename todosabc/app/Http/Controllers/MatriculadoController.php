@@ -30,6 +30,8 @@ class MatriculadoController extends Controller
     private $lugares_atencion;
     private $estudiantes;
     private $desertados;
+    private $curso;
+
 
     public function index()
     {
@@ -99,6 +101,7 @@ class MatriculadoController extends Controller
         $matriculado = Matriculado::find($request->input('id_matriculado'));
         $si_asiste_con_frecuencia = $request->input('si_asiste_con_frecuencia');
         $no_asiste_con_frecuencia = $request->input('no_asiste_con_frecuencia');
+
 
         if(($si_asiste_con_frecuencia!='' and $no_asiste_con_frecuencia!='') or ($si_asiste_con_frecuencia=='' and $no_asiste_con_frecuencia=='')){
             $request->session()->put('estadoMat', 500);
@@ -316,7 +319,7 @@ class MatriculadoController extends Controller
     {
         $this->cargarCombos();
         $paralelos = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O'];
-    	if($opcion=='modificar'){
+       	if($opcion=='modificar'){
             $matriculado = Matriculado::find($id);
             $this->cargarInstitucionesDelUsuario();
             if(session('user')->id_oferta==2 or session('user')->id_oferta==10 ){
@@ -352,9 +355,9 @@ class MatriculadoController extends Controller
                                                        'actividades_economicas' => $this->actividades_economicas,
                                                        'datos_familiares' => $this->datos_familiares,
                                                        'nacionalidades' => $this->nacionalidades,
-                                                    'rezagos_educativos' => $this->rezagos_educativos,
-                                                   'ultimos_anios_aprobados' => $this->ultimos_anios_aprobados,
-                                                    'ofertas_educativas' => $this->ofertas_educativas,
+                                                       'rezagos_educativos' => $this->rezagos_educativos,
+                                                       'ultimos_anios_aprobados' => $this->ultimos_anios_aprobados,
+                                                       'ofertas_educativas' => $this->ofertas_educativas,
                                                        'zonas' => $this->zonas,
                                                        'paralelo' => $matriculado->paralelo,
                                                        'paralelos' => $paralelos,
@@ -363,7 +366,53 @@ class MatriculadoController extends Controller
                                                        'lugares_atencion' => $this->lugares_atencion,
                                                        'id_institucion' => $matriculado->id_institucion,
                                                        ]);
-            }else{
+            }else if(session('user')->id_oferta==22 or session('user')->id_oferta==23 or session('user')->id_oferta==24)
+            {
+                $this->cargarDocentesDeUsuario();
+                return view('matriculados.modificar', ['matriculado' => $matriculado,
+                                                       'ies' => $this->ies,
+                                                       'docentes' => $this->docentes,
+                                                       'generos' => $this->generos,
+                                                       'estados_civiles' => $this->estados_civiles,
+                                                       'etnias' => $this->etnias,
+                                                       'situaciones_laborales' => $this->situaciones_laborales,
+                                                       'actividades_economicas' => $this->actividades_economicas,
+                                                       'datos_familiares' => $this->datos_familiares,
+                                                       'nacionalidades' => $this->nacionalidades,
+                                                       'rezagos_educativos' => $this->rezagos_educativos,
+                                                       'ultimos_anios_aprobados' => $this->ultimos_anios_aprobados,
+                                                       'ofertas_educativas' => $this->ofertas_educativas,
+                                                       'zonas' => $this->zonas,
+                                                       'paralelo' => $matriculado->paralelo,
+                                                       'paralelos' => $paralelos,
+                                                       'id_docente' => $this->docentes[0]->id,
+                                                       'lugar' => $matriculado->lugar_atencion_especial,
+                                                       'lugares_atencion' => $this->lugares_atencion,
+                                                       'id_institucion' => $matriculado->id_institucion,
+                                                        'curso'=>$matriculado->curso,
+                                                       ]);
+            } else  if(session('user')->id_oferta==22 or session('user')->id_oferta==25 or session('user')->id_oferta==26 or session('user')->id_oferta==27 or session('user')->id_oferta==28 or session('user')->id_oferta==29 or session('user')->id_oferta==30 ){
+                $this->cargarDocentesDeUsuario();
+                return view('matriculados.modificar', ['matriculado' => $matriculado,
+                                                      'ies' => $this->ies,
+                                                      'generos' => $this->generos,
+                                                      'estados_civiles' => $this->estados_civiles,
+                                                      'etnias' => $this->etnias,
+                                                      'situaciones_laborales' => $this->situaciones_laborales,
+                                                      'actividades_economicas' => $this->actividades_economicas,
+                                                      'datos_familiares' => $this->datos_familiares,
+                                                      'nacionalidades' => $this->nacionalidades,
+                                                      'rezagos_educativos' => $this->rezagos_educativos,
+                                                      'ultimos_anios_aprobados' => $this->ultimos_anios_aprobados,
+                                                      'ofertas_educativas' => $this->ofertas_educativas,
+                                                      'zonas' => $this->zonas,
+                                                      'paralelo' => $matriculado->paralelo,
+                                                      'paralelos' => $paralelos,
+                                                      'curso'=>$matriculado->curso,
+                                                      ]);
+
+            }
+            else{
                 return view('matriculados.modificar', ['matriculado' => $matriculado,
                                                       'ies' => $this->ies,
                                                       'generos' => $this->generos,
@@ -408,7 +457,7 @@ class MatriculadoController extends Controller
                                                       'paralelos' => $paralelos,
                                                       ]);
             }else if(session('user')->id_oferta==8 or session('user')->id_oferta==15 or
-             session('user')->id_oferta==17 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==23 or session('user')->id_oferta==24 )
+             session('user')->id_oferta==17 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==22 or session('user')->id_oferta==23 or session('user')->id_oferta==24 )
                         {
                 $this->cargarDocentesDeUsuario();
                 return view('matriculados.inscrito', ['inscrito' => $inscrito,
@@ -468,6 +517,7 @@ class MatriculadoController extends Controller
         $matriculado->email = $request->input('email');
         $matriculado->telefono_celular = $request->input('telefono_celular');
         $matriculado->fecha_matriculacion = date('Y-m-d h:m.s');
+        $matriculado->curso=$request->input('curso');
 
         if($request->input('tipo_documento_identidad')!='-1'){
             $matriculado->tipo_documento_identidad = $request->input('tipo_documento_identidad');
@@ -626,7 +676,7 @@ class MatriculadoController extends Controller
             }
 
 
-            else if(session('user')->id_oferta==8 or session('user')->id_oferta==15 or  session('user')->id_oferta==19 or session('user')->id_oferta==16  or session('user')->id_oferta==17 or session('user')->id_oferta==23 or session('user')->id_oferta==24 or session('user')->id_oferta==22)
+            else if(session('user')->id_oferta==8 or session('user')->id_oferta==15 or  session('user')->id_oferta==19 or session('user')->id_oferta==16  or session('user')->id_oferta==17 or session('user')->id_oferta==22 or session('user')->id_oferta==23 or session('user')->id_oferta==24 )
             {
 
                 if($request->input('lugar')=='-1'){

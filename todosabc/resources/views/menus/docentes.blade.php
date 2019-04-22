@@ -12,7 +12,11 @@
 			</div>
 		@endif
 		@if (isset($docentes) and $docentes->count() == 0 or session('user')->id_oferta==6 or session('user')->id_oferta==7 or session('user')->id_oferta==8 or session('user')->id_oferta==13 or session('user')->id_oferta==14 or session('user')->id_oferta==15
-		or session('user')->id_oferta==20 or session('user')->id_oferta==21)
+		or session('user')->id_oferta==20 or session('user')->id_oferta==21
+		or session('user')->id_oferta==25 or session('user')->id_oferta==28
+		or session('user')->id_oferta==26 or session('user')->id_oferta==27
+		or session('user')->id_oferta==29 or session('user')->id_oferta==30)
+
 		<a type="button" class="btn btn-success btn-sm" href="{{ url('docentes/nuevo') }}">Nuevo Docente</a>
 		<br><br>
 		@endif
@@ -52,7 +56,11 @@
 			    				<td>{{ $doc->email }}</td>
 			    				@if (session('user')->id_oferta==2)
 			    				<td>@if($doc->tiene_voluntario===true) SI @else NO @endif</td>
-			    				@elseif (session('user')->id_oferta==10  or session('user')->id_oferta==17 or session('user')->id_oferta==16  or session('user')->id_oferta==22 or session('user')->id_oferta==23)
+			    				@elseif (session('user')->id_oferta==10  or session('user')->id_oferta==17
+			    					or session('user')->id_oferta==16   or  session('user')->id_oferta==24
+			    					or session('user')->id_oferta==25 or session('user')->id_oferta==26
+			    					or session('user')->id_oferta==27 or session('user')->id_oferta==28
+			    					or session('user')->id_oferta==29 or session('user')->id_oferta==30)
 			    				<td>{{ $doc->clasificacion }}</td>
 			    				@endif
 								<td>{{ $doc->fecha_registro }}</td>

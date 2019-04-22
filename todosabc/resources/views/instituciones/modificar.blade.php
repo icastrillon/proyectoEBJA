@@ -18,10 +18,13 @@
 
 				<div class="form-horizontal">
 					<div class="form-group">
-						 <div class="alert alert-info alert-dismissible" role="alert">
+			@if(session('user')->id_oferta==22 or session('user')->id_oferta==23  or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26 or session('user')->id_oferta==27 or session('user')->id_oferta==28 or session('user')->id_oferta==29 or session('user')->id_oferta==30 )
+
+			 <div class="alert alert-info alert-dismissible" role="alert">
 			<p style="font-weight: bold;">RECOMENDACIÓN:</p>
 			<p style="text-align: justify;"><em>Verifique que el CPl corresponda con la institución, si no corresponde eliminar la institución y volver a registrar.<span style="color: red;">Verificar antes de relacionar docente y  matriculados.</span></p>
-		</div>
+			</div>
+			@endif
 					    <label for="lblZona" class="col-sm-3 control-label">ZONA</label>
 					    <div class="col-sm-3">
 					      <span class="form-control" id="lblZona">{{ session('user')->zona }}</span>
@@ -56,7 +59,7 @@
 					</div>
 				</div>
 			</div>
-	@if(session('user')->id_oferta==23  or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26 )
+	@if(session('user')->id_oferta==22 or session('user')->id_oferta==23  or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26  or session('user')->id_oferta==27 or session('user')->id_oferta==28 or session('user')->id_oferta==29 or session('user')->id_oferta==30)
 			<form id="frm-guardar" action="{{ route('modificarIE') }}" method="POST">
 				{{ csrf_field() }}
 				<div class="form-horizontal">

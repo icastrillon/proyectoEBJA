@@ -53,8 +53,17 @@ class DocenteController extends Controller
         $nombres = $request->input('nombres');
         $email = $request->input('email');
         $telefono = $request->input('telefono');
+        $especialidad_titulo=$request->input('especialidad_titulo');
 
-        if(session('user')->id_oferta!=2 and ($apellidos==null or $nombres==null or $email==null or $telefono==null)){
+
+        if((session('user')->id_oferta==22 or session('user')->id_oferta==23  or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26 or session('user')->id_oferta==27 or session('user')->id_oferta==28 or session('user')->id_oferta==29 or session('user')->id_oferta==30 )and ($apellidos==null or $nombres==null or $email==null or $telefono==null or $especialidad_titulo==null))
+            {
+            $request->session()->put('estadoDoc', 500);
+            $msgDoc = 'Los campos con (*) son obligatorios';
+            $request->session()->put('msgDoc', $msgDoc);
+            return redirect()->route('nuevoDocente');
+
+        } else if(session('user')->id_oferta!=2 and ($apellidos==null or $nombres==null or $email==null or $telefono==null)){
             $request->session()->put('estadoDoc', 500);
             $msgDoc = 'Los campos con (*) son obligatorios';
             $request->session()->put('msgDoc', $msgDoc);
@@ -105,6 +114,11 @@ class DocenteController extends Controller
             $docente->nombres = $nombres;
         }
 
+        if(session('user')->id_oferta==22 or session('user')->id_oferta==23  or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26 or session('user')->id_oferta==27 or session('user')->id_oferta==28 or session('user')->id_oferta==29 or session('user')->id_oferta==30)
+        {
+                    $docente->especialidad_titulo=$especialidad_titulo;
+        }
+
     	$docente->update();
 
     	$request->session()->put('estadoDoc', 200);
@@ -121,6 +135,7 @@ class DocenteController extends Controller
         $email = $request->input('email');
         $telefono = $request->input('telefono');
         $id_institucion = $request->input('id_institucion');
+        $especialidad_titulo=$request->input('especialidad_titulo');
 
         $docente_existente = DB::table('todosabc.docentes')
         ->where('cedula',$identificacion)
@@ -134,7 +149,14 @@ class DocenteController extends Controller
             return redirect()->route('nuevoDocente');
         }
 
-        if(session('user')->id_oferta!=2 and ($identificacion==null or $apellidos==null or $nombres==null or $email==null or $telefono==null)){
+        if( (session('user')->id_oferta==22 or session('user')->id_oferta==23  or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26 or session('user')->id_oferta==27 or session('user')->id_oferta==28 or session('user')->id_oferta==29 or session('user')->id_oferta==30) and ($apellidos==null or $nombres==null or $email==null or $telefono==null or $especialidad_titulo==null))
+            {
+            $request->session()->put('estadoDoc', 500);
+            $msgDoc = 'Los campos con (*) son obligatorios';
+            $request->session()->put('msgDoc', $msgDoc);
+            return redirect()->route('nuevoDocente');
+        }
+        else   if(session('user')->id_oferta!=2 and ($identificacion==null or $apellidos==null or $nombres==null or $email==null or $telefono==null)){
             $request->session()->put('estadoDoc', 500);
             $msgDoc = 'Los campos con (*) son obligatorios';
             $request->session()->put('msgDoc', $msgDoc);
@@ -191,6 +213,12 @@ class DocenteController extends Controller
     	$docente->activo = true;
     	$docente->email = $email;
     	$docente->telefono = $telefono;
+
+
+        if(session('user')->id_oferta==22 or session('user')->id_oferta==23  or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26 or session('user')->id_oferta==27 or session('user')->id_oferta==28 or session('user')->id_oferta==29 or session('user')->id_oferta==30)
+            {
+                        $docente->especialidad_titulo=$especialidad_titulo;
+            }
 
     	$docente->save();
 

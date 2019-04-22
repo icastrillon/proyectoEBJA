@@ -19,14 +19,22 @@
 			</div>
 		@endif
 
-		@if (isset($ies) and $ies->count() == 0 or session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==17  or session('user')->id_oferta==22 or  session('user')->id_oferta==23 or session('user')->id_oferta==24)
+		@if (isset($ies) and $ies->count() == 0 or session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==17  or session('user')->id_oferta==22 or session('user')->id_oferta==23 or session('user')->id_oferta==24 )
 		<a type="button" class="btn btn-success btn-sm" href="{{ url('instituciones/nueva') }}">Nueva Institución</a><br><br>
 		@endif
 	</div>
 	<div class="panel panel-primary">
 		<div class="panel-heading">Paso 1: Instituciones > Instituciones Registradas</div>
 		<div class="panel-body">
-		@if ( session('user')->id_oferta==22 or  session('user')->id_oferta==23 or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26)
+		@if ( session('user')->id_oferta==22 or
+                     session('user')->id_oferta==23 or
+                     session('user')->id_oferta==24 or
+                     session('user')->id_oferta==25 or
+                     session('user')->id_oferta==26 or
+                     session('user')->id_oferta==27 or
+                     session('user')->id_oferta==28 or
+                     session('user')->id_oferta==29 or
+                     session('user')->id_oferta==30)
 		   <table class="table table-hover table-condensed table-responsive">
 		    	<thead>
 		    		<tr>

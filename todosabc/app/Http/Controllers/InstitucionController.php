@@ -10,6 +10,7 @@ class InstitucionController extends Controller
     private $amies;
     private $cpls;
 
+
     public function index()
     {
         $this->obtenerInstitucionesDelUsuario();
@@ -79,7 +80,15 @@ class InstitucionController extends Controller
                      ->get();
 
 
-                    if(session('user')->id_oferta==23 or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26)
+                    if(session('user')->id_oferta==22 or
+                     session('user')->id_oferta==23 or
+                     session('user')->id_oferta==24 or
+                     session('user')->id_oferta==25 or
+                     session('user')->id_oferta==26 or
+                     session('user')->id_oferta==27 or
+                     session('user')->id_oferta==28 or
+                     session('user')->id_oferta==29 or
+                     session('user')->id_oferta==30 )
                     {
                         return view('instituciones.nueva', ['ie' => $ie, 'amie' => $amie,'cpls' =>$cpls]);
                     }
@@ -87,7 +96,8 @@ class InstitucionController extends Controller
                     return view('instituciones.nueva', ['ie' => $ie, 'amie' => $amie]);
                     }
 
-                }else{
+                }else
+                {
                     $msgIE = '';
                     $request->session()->put('estadoIE', 301);
                     $request->session()->put('msgIE', $msgIE);
@@ -98,7 +108,15 @@ class InstitucionController extends Controller
                     ->where('id',$ie->id_cpl)
                     ->get();
 
-                    if(session('user')->id_oferta==23 or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26)
+                    if(session('user')->id_oferta==22 or
+                     session('user')->id_oferta==23 or
+                     session('user')->id_oferta==24 or
+                     session('user')->id_oferta==25 or
+                     session('user')->id_oferta==26 or
+                     session('user')->id_oferta==27 or
+                     session('user')->id_oferta==28 or
+                     session('user')->id_oferta==29 or
+                     session('user')->id_oferta==30)
                     {
                         return view('instituciones.modificar', ['ie' => $ie, 'amie' => $amie,'cpls'=>$cpls]);
                     }
@@ -149,14 +167,21 @@ class InstitucionController extends Controller
                // ->join('todosabc.cpl','todosabc.instituciones.id_cpl','=','todosabc.cpl.id')
                // ->select('todosabc.cpl.id','todosabc.cpl.nombre')
                 //->get();
-
-                        $cpls=DB::table('todosabc.cpl')
+                    $cpls=DB::table('todosabc.cpl')
                     ->select('todosabc.cpl.id','todosabc.cpl.nombre')
                     ->where('id',$ie->id_cpl)
                     ->get();
 
 
-                if(session('user')->id_oferta==23 or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26)
+                if(session('user')->id_oferta==22 or
+                     session('user')->id_oferta==23 or
+                     session('user')->id_oferta==24 or
+                     session('user')->id_oferta==25 or
+                     session('user')->id_oferta==26 or
+                     session('user')->id_oferta==27 or
+                     session('user')->id_oferta==28 or
+                     session('user')->id_oferta==29 or
+                     session('user')->id_oferta==30)
                 {
                   return view('instituciones.modificar', ['ie' => $ie,
                                                         'amie' => $amie,
@@ -208,7 +233,15 @@ class InstitucionController extends Controller
                  ->get();
 
 
-                if(session('user')->id_oferta==23 or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26){
+                if(session('user')->id_oferta==22 or
+                     session('user')->id_oferta==23 or
+                     session('user')->id_oferta==24 or
+                     session('user')->id_oferta==25 or
+                     session('user')->id_oferta==26 or
+                     session('user')->id_oferta==27 or
+                     session('user')->id_oferta==28 or
+                     session('user')->id_oferta==29 or
+                     session('user')->id_oferta==30){
 
 
                 return view('instituciones.modificar', ['ie' => $ie_existente, 'amie' => $amie,'cpls'=>$cpls]);
@@ -221,7 +254,15 @@ class InstitucionController extends Controller
             }
         }
 
-        if(session('user')->id_oferta==23 or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26)
+        if(session('user')->id_oferta==22 or
+                     session('user')->id_oferta==23 or
+                     session('user')->id_oferta==24 or
+                     session('user')->id_oferta==25 or
+                     session('user')->id_oferta==26 or
+                     session('user')->id_oferta==27 or
+                     session('user')->id_oferta==28 or
+                     session('user')->id_oferta==29 or
+                     session('user')->id_oferta==30)
         {
 
         $cpl_existe=DB::table('todosabc.cpl')
@@ -284,6 +325,17 @@ class InstitucionController extends Controller
         ->where('id',$request->input('id_cpl'))
         ->get();
 
+        if(session('user')->id_oferta==22 or
+                     session('user')->id_oferta==23 or
+                     session('user')->id_oferta==24 or
+                     session('user')->id_oferta==25 or
+                     session('user')->id_oferta==26 or
+                     session('user')->id_oferta==27 or
+                     session('user')->id_oferta==28 or
+                     session('user')->id_oferta==29 or
+                     session('user')->id_oferta==30)
+        {
+
         $ie = new Institucion;
         $ie->id_usuario = session('user')->id;
         $ie->amie = $request->input('selectAmie');
@@ -295,7 +347,21 @@ class InstitucionController extends Controller
         $request->session()->put('estadoIE', 200);
         $request->session()->put('msgIE', $msgIE);
         return redirect()->route('institucionesUsuario');
+        }
+        else{
+          $ie = new Institucion;
+        $ie->id_usuario = session('user')->id;
+        $ie->amie = $request->input('selectAmie');
+        $ie->fecha_registro = date('d-m-Y h:i:s');
+        $ie->save();
+        $msgIE = "Institución educativa ".$ie->amie." registrada exitosamente ";
+        $request->session()->put('estadoIE', 200);
+        $request->session()->put('msgIE', $msgIE);
+        return redirect()->route('institucionesUsuario');
+        }
+
     }
+
     public function limpiar(Request $request)
     {
         $request->session()->put('estadoIE', 301);

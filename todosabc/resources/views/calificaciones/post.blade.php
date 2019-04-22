@@ -36,7 +36,7 @@
 				<label>{{ $ie->institucion }}</label>
 			</td>
 			<td>
-				<label style="font-weight: bold; font-size: 12px;">DISTRITO EDUCATIVO:</label> 
+				<label style="font-weight: bold; font-size: 12px;">DISTRITO EDUCATIVO:</label>
 			</td>
 			<td>
 				<label>{{ $ie->distrito }}</label>
@@ -139,9 +139,9 @@
 							<td>{{ $mat->nombres_aspirantes }}</td>
 							<td>{{ $mat->cedula_identidad }}</td>
 							<td>
-								<input type="checkbox" name="ds-{{ $mat->codigo_inscripcion }}" id="ds-{{ $mat->codigo_inscripcion }}" onchange="marcar_desercion('{{ $mat->codigo_inscripcion }}',this);document.getElementById('hds-{{ $mat->codigo_inscripcion }}').value = this.checked;" 
+								<input type="checkbox" name="ds-{{ $mat->codigo_inscripcion }}" id="ds-{{ $mat->codigo_inscripcion }}" onchange="marcar_desercion('{{ $mat->codigo_inscripcion }}',this);document.getElementById('hds-{{ $mat->codigo_inscripcion }}').value = this.checked;"
 								@if($mat->desertado==true)
-									checked="true" 
+									checked="true"
 								@endif>
 								<input type="hidden" id="hds-{{ $mat->codigo_inscripcion }}" name="hds-{{ $mat->codigo_inscripcion }}" value="{{ $mat->desertado }}">
 							</td>
@@ -149,16 +149,16 @@
 								<table>
 									<tr>
 										<td>
-											<input class="col-md-1 form-control nota-post" type="text" id="p1-{{ $mat->codigo_inscripcion }}" maxlength="5" onblur="calcular_promedio('{{ $mat->codigo_inscripcion }}');document.getElementById('hp1-{{ $mat->codigo_inscripcion }}').value = this.value;" value="{{ $mat->parcial_1 }}" 
+											<input class="col-md-1 form-control nota-post" type="text" id="p1-{{ $mat->codigo_inscripcion }}" maxlength="5" onblur="calcular_promedio('{{ $mat->codigo_inscripcion }}');document.getElementById('hp1-{{ $mat->codigo_inscripcion }}').value = this.value;" value="{{ $mat->parcial_1 }}"
 											@if($mat->desertado==true)
-												disabled="true" 
+												disabled="true"
 											@endif>
 											<input type="hidden" name="hp1-{{ $mat->codigo_inscripcion }}" id="hp1-{{ $mat->codigo_inscripcion }}" value="{{ $mat->parcial_1 }}">
 										</td>
 										<td>
-											<input class="col-md-1 form-control nota-post" type="text" id="p2-{{ $mat->codigo_inscripcion }}" maxlength="5" onblur="calcular_promedio('{{ $mat->codigo_inscripcion }}');document.getElementById('hp2-{{ $mat->codigo_inscripcion }}').value = this.value;" value="{{ $mat->parcial_2 }}" 
+											<input class="col-md-1 form-control nota-post" type="text" id="p2-{{ $mat->codigo_inscripcion }}" maxlength="5" onblur="calcular_promedio('{{ $mat->codigo_inscripcion }}');document.getElementById('hp2-{{ $mat->codigo_inscripcion }}').value = this.value;" value="{{ $mat->parcial_2 }}"
 											@if($mat->desertado==true)
-												disabled="true" 
+												disabled="true"
 											@endif>
 											<input type="hidden" name="hp2-{{ $mat->codigo_inscripcion }}" id="hp2-{{ $mat->codigo_inscripcion }}" value="{{ $mat->parcial_2 }}">
 										</td>
@@ -176,9 +176,9 @@
 								<table>
 									<tr>
 										<td>
-											<input class="col-md-1 form-control nota-post" type="text" id="ex-{{ $mat->codigo_inscripcion }}" maxlength="5" onblur="calcular_promedio('{{ $mat->codigo_inscripcion }}');document.getElementById('hex-{{ $mat->codigo_inscripcion }}').value = this.value;" value="{{ $mat->examen }}" 
+											<input class="col-md-1 form-control nota-post" type="text" id="ex-{{ $mat->codigo_inscripcion }}" maxlength="5" onblur="calcular_promedio('{{ $mat->codigo_inscripcion }}');document.getElementById('hex-{{ $mat->codigo_inscripcion }}').value = this.value;" value="{{ $mat->examen }}"
 											@if($mat->desertado==true)
-												disabled="true" 
+												disabled="true"
 											@endif>
 											<input type="hidden" name="hex-{{ $mat->codigo_inscripcion }}" id="hex-{{ $mat->codigo_inscripcion }}" value="{{ $mat->examen }}">
 										</td>
@@ -189,30 +189,30 @@
 								</table>
 							</td>
 							<td>
-								<select style="font-size: 11px; height: 25px; width: 120px;" class="form-control" id="evcomp-{{ $mat->codigo_inscripcion }}" value="{{ $mat->comportamiento }}" onchange="calcular_promedio('{{ $mat->codigo_inscripcion }}');document.getElementById('hevcomp-{{ $mat->codigo_inscripcion }}').value = this.value;" 
+								<select style="font-size: 11px; height: 25px; width: 120px;" class="form-control" id="evcomp-{{ $mat->codigo_inscripcion }}" value="{{ $mat->comportamiento }}" onchange="calcular_promedio('{{ $mat->codigo_inscripcion }}');document.getElementById('hevcomp-{{ $mat->codigo_inscripcion }}').value = this.value;"
 									@if($mat->desertado==true)
-										disabled="true" 
+										disabled="true"
 									@endif>
 									<option value="-1">seleccionar</option>
-									<option value="A" 
-									@if($mat->comportamiento=='A') 
-										selected="selected" 
+									<option value="A"
+									@if($mat->comportamiento=='A')
+										selected="selected"
 									@endif>Muy Satisfactorio</option>
-									<option value="B" 
-									@if($mat->comportamiento=='B') 
-										selected="selected" 
+									<option value="B"
+									@if($mat->comportamiento=='B')
+										selected="selected"
 									@endif>Satisfactorio</option>
-									<option value="C" 
-									@if($mat->comportamiento=='C') 
-										selected="selected" 
+									<option value="C"
+									@if($mat->comportamiento=='C')
+										selected="selected"
 									@endif>Poco Satisfactorio</option>
-									<option value="D" 
-									@if($mat->comportamiento=='D') 
-										selected="selected" 
+									<option value="D"
+									@if($mat->comportamiento=='D')
+										selected="selected"
 									@endif>Mejorable</option>
-									<option value="E" 
-									@if($mat->comportamiento=='E') 
-										selected="selected" 
+									<option value="E"
+									@if($mat->comportamiento=='E')
+										selected="selected"
 									@endif>Insatisfactorio</option>
 								</select>
 								<input type="hidden" name="hevcomp-{{ $mat->codigo_inscripcion }}" id="hevcomp-{{ $mat->codigo_inscripcion }}" value="{{ $mat->comportamiento }}">
@@ -222,9 +222,9 @@
 								<input type="hidden" name="hnf-{{ $mat->codigo_inscripcion }}" id="hnf-{{ $mat->codigo_inscripcion }}" value="{{ $mat->nota_final }}">
 							</td>
 							<td>
-								<input class="col-md-1 form-control nota" type="text" id="em-{{ $mat->codigo_inscripcion }}" value="{{ $mat->estado }}" disabled="true" 
-								@if($mat->estado=='D') 
-									style="font-weight: bold;background-color:orange;" 
+								<input class="col-md-1 form-control nota" type="text" id="em-{{ $mat->codigo_inscripcion }}" value="{{ $mat->estado }}" disabled="true"
+								@if($mat->estado=='D')
+									style="font-weight: bold;background-color:orange;"
 								@elseif($mat->estado=='NP')
 									style="font-weight: bold;background-color:#ffb3b3;"
 								@elseif($mat->estado=='P')

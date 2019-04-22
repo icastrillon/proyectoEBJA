@@ -278,7 +278,7 @@
 							@endif
 						</div>
 					</div>
-					@elseif (session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==17 or session('user')->id_oferta==22 or session('user')->id_oferta==23 or session ('user')->id_oferta==24)
+					@elseif (session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==17  or session('user')->id_oferta==22 or session('user')->id_oferta==23 or session ('user')->id_oferta==24)
 					<div class="form-group">
 						<label class="col-sm-4 control-label" for="id_institucion">* INSTITUCIÓN</label>
 						<div class="col-sm-5">
@@ -372,6 +372,47 @@
 						</div>
 					</div>
 				</div>
+
+
+			@if (session('user')->id_oferta==25 or session('user')->id_oferta==28  )
+     		<div class="form-horizontal">
+					    <label for="curso" class="col-sm-4 control-label"></span>*CURSO</label>
+					       <div class="col-sm-5">
+							  	<select class="form-control" id="curso" name="curso" style="width: 450px; font-size: 10px;" value="{{ $matriculado->curso }}">
+					    			<option @if($matriculado->curso=='8vo')
+					    			selected="selected"
+				    				@endif value="8vo">8vo</option>
+									<option @if($matriculado->curso=='9no')
+					    			selected="selected"
+				    				@endif value="9no">9no</option>
+				    				<option @if($matriculado->curso=='10mo')
+					    			selected="selected"
+				    				@endif value="10mo">10mo</option>
+					    		</select>
+							</div>
+			</div>
+			@endif
+
+			@if (session('user')->id_oferta==26 or session('user')->id_oferta==27 or session('user')->id_oferta==29 or session('user')->id_oferta==30)
+     		<div class="form-horizontal">
+					    <label for="curso" class="col-sm-4 control-label"></span>*CURSO</label>
+					        <div class="col-sm-5">
+							  	<select class="form-control" id="curso" name="curso" style="width: 450px; font-size: 10px;" value="{{ $matriculado->curso }}">
+					    			<option @if($matriculado->curso=='1ero')
+					    			selected="selected"
+				    				@endif value="1ero">1ero</option>
+									<option @if($matriculado->curso=='2do')
+					    			selected="selected"
+				    				@endif value="2do">2do</option>
+				    				<option @if($matriculado->curso=='3ero')
+					    			selected="selected"
+				    				@endif value="3ero">3ero</option>
+					    		</select>
+							</div>
+
+			</div>
+			@endif
+
 				@if (session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==17 or  session('user')->id_oferta==22 or session('user')->id_oferta==23 or session ('user')->id_oferta==24 )
 				<div class="form-horizontal">
 					<div class="form-group">

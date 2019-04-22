@@ -98,9 +98,11 @@
     <script src="{{ asset('js/alfa.js') }}"></script>
     @elseif(session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==24)
     <script src="{{ asset('js/post.js') }}"></script>
-    @elseif(session('user')->id_oferta==6 or session('user')->id_oferta==13 or session('user')->id_oferta==20 or session('user')->id_oferta==25)
+    @elseif(session('user')->id_oferta==6 or session('user')->id_oferta==13 or
+    session('user')->id_oferta==20 or session('user')->id_oferta==25 or session('user')->id_oferta==28)
     <script src="{{ asset('js/basica.js') }}"></script>
-    @elseif(session('user')->id_oferta==7 or session('user')->id_oferta==14  or session('user')->id_oferta==21 or session('user')->id_oferta==26)
+    @elseif(session('user')->id_oferta==7 or session('user')->id_oferta==14  or session('user')->id_oferta==21 or session('user')->id_oferta==26 or session('user')->id_oferta==27 or session('user')->id_oferta==29 or session('user')->id_oferta==30)
+
     <script src="{{ asset('js/bachillerato.js') }}"></script>
     @endif
 </body>

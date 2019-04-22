@@ -31,7 +31,7 @@
 					    </div>
 					</div>
 				</div>
-			@if(session('user')->id_oferta==23  or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26 )
+			@if(session('user')->id_oferta==22 or session('user')->id_oferta==23  or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26 or session('user')->id_oferta==27 or session('user')->id_oferta==28 or session('user')->id_oferta==29 or session('user')->id_oferta==30 )
 				<div class="form-horizontal">
 					<div class="form-group">
 				<form id="frm-guardar" action="{{ route('guardarIE') }}" method="POST">

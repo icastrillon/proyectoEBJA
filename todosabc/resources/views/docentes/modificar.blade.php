@@ -73,6 +73,19 @@
 					    	</select>
 						</div>
 					</div>
+
+					@if(session('user')->id_oferta==22 or session('user')->id_oferta==23  or session('user')->id_oferta==24 or session('user')->id_oferta==25 or session('user')->id_oferta==26 or session('user')->id_oferta==27 or session('user')->id_oferta==28 or session('user')->id_oferta==29 or session('user')->id_oferta==30 )
+
+					<div class="form-horizontal">
+						<div class="form-group">
+						    <label for="especialidad_titulo" class="col-sm-3 control-label">ESPECIALIDAD DEL TITULO</label>
+						    <div class="col-sm-7">
+						      <input class="form-control" id="especialidad_titulo" name="especialidad_titulo" value="{{ $docente->especialidad_titulo }}">
+						    </div>
+						</div>
+					</div>
+					@endif
+
 					@if (session('user')->id_oferta==2)
 					<div class="form-horizontal">
 					    <label for="tiene_voluntario" class="col-sm-3 control-label"><span style="color: red; font-weight: bold; font-size: 20px;">--></span> TIENE VOLUNTARIO</label>
@@ -119,7 +132,7 @@
 					    </div>
 					</div>
 
-					@elseif(session('user')->id_oferta==16 or session('user')->id_oferta==17  or  session('user')->id_oferta==22 or session('user')->id_oferta==23 )
+					@elseif(session('user')->id_oferta==16 or session('user')->id_oferta==17)
 					<div class="form-horizontal">
 					    <label for="clasificacion" class="col-sm-3 control-label"><span style="color: red; font-weight: bold; font-size: 20px;">--></span> CLASIFICACIÓN:</label>
 					    <div class="col-sm-7 alert alert-warning" role="alert">

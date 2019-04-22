@@ -277,7 +277,9 @@
 							<input type="hidden" name="id_docente" value="{{ $id_docente }}">
 						</div>
 					</div>
-					@elseif (session('user')->id_oferta==8 or session('user')->id_oferta==15  or session('user')->id_oferta==16 or session('user')->id_oferta==17 or session('user')->id_oferta==19 or session('user')->id_oferta==22 or session('user')->id_oferta==23 or session ('user')->id_oferta==24 )
+					@elseif (session('user')->id_oferta==8 or session('user')->id_oferta==15  or session('user')->id_oferta==16 or session('user')->id_oferta==17 or session('user')->id_oferta==19
+						or session('user')->id_oferta==22
+					or session('user')->id_oferta==23 or  session('user')->id_oferta==24)
 					<div class="form-group">
 						<label class="col-sm-4 control-label" for="id_institucion">* INSTITUCIÓN</label>
 						<div class="col-sm-5">
@@ -364,13 +366,40 @@
 				</div>
 				<div class="form-horizontal">
 					<div class="form-group">
-						<label class="col-sm-4 control-label" for="direccion">* DIRECCION</label>
+							<label class="col-sm-4 control-label" for="direccion">* DIRECCION</label>
 						<div class="col-sm-5">
 							<input class="form-control" type="text" id="direccion" name="direccion" value="{{ $inscrito->direccion }}">
 						</div>
 					</div>
 				</div>
-			@if (session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==17 or session('user')->id_oferta==22 or session('user')->id_oferta==23 or session ('user')->id_oferta==24 )
+			@if (session('user')->id_oferta==25 or session('user')->id_oferta==28  )
+     		<div class="form-horizontal">
+					    <label for="curso" class="col-sm-4 control-label"></span>*CURSO</label>
+					       <div class="col-sm-5">
+							  	<select class="form-control" id="curso" name="curso" style="width: 450px; font-size: 10px;" value="{{ $inscrito->curso }}">
+					    			<option value="8vo">8vo</option>
+									<option value="9no">9no</option>
+									<option value="10mo">10mo</option>
+					    		</select>
+							</div>
+			</div>
+			@endif
+
+			@if (session('user')->id_oferta==26 or session('user')->id_oferta==27 or session('user')->id_oferta==29 or session('user')->id_oferta==30)
+     		<div class="form-horizontal">
+					    <label for="clasificacion" class="col-sm-4 control-label"></span>*CURSO</label>
+					        <div class="col-sm-5">
+							  	<select class="form-control" id="curso" name="curso" style="width: 450px; font-size: 10px;" value="{{ $inscrito->curso }}">
+					    			<option value="8vo">1ero</option>
+									<option value="9no">2do</option>
+									<option value="10mo">3ero</option>
+					    		</select>
+							</div>
+
+			</div>
+			@endif
+			@if (session('user')->id_oferta==8 or session('user')->id_oferta==15 or session('user')->id_oferta==19 or session('user')->id_oferta==16 or session('user')->id_oferta==17 or
+			session('user')->id_oferta==22 or session('user')->id_oferta==23 or session('user')->id_oferta==24 )
 				<div class="form-horizontal">
 					<div class="form-group">
 					    <label for="lugar" class="col-sm-4 control-label">* Estudiante atendido en:</label>
@@ -385,6 +414,7 @@
 									>{{ $val }}</option>
 								@endforeach
 							</select>
+
 						</div>
 					</div>
 				</div>
